@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="math">
+      <UniqueIdentifier>{c308998f-6f75-404c-a0c1-b143afa65af4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="renderer">
+      <UniqueIdentifier>{6195d996-8e26-4cf5-adde-b2dcef128d80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui">
+      <UniqueIdentifier>{ce319511-33bd-4611-8db6-efc40d3d4f93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{ae478839-778e-4630-ad62-f11b56d64c24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extern">
+      <UniqueIdentifier>{6e990866-2bfd-49a8-b58f-216cc6ad8f29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extern\texture">
+      <UniqueIdentifier>{5282ae10-9b4b-4b3c-bd8b-0b9959f380bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extern\texture\libpng">
+      <UniqueIdentifier>{5ee8f4e3-7827-4e42-99a3-2600ff2ef84a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extern\texture\libjpeg">
+      <UniqueIdentifier>{48e5beab-8159-4d5a-aa47-b1b80a958623}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platforms">
+      <UniqueIdentifier>{bad4c6db-0f2b-4849-9c7f-d6b5e2384635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platforms\GL">
+      <UniqueIdentifier>{bcfc0487-95ee-4d65-a2b6-f92717b1c9db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extern\zlib">
+      <UniqueIdentifier>{dffda1fc-9f1c-4750-b1b7-5db2420d5435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="renderer\win32">
+      <UniqueIdentifier>{a6b2bc67-7494-4cf7-bc96-ec1a44b39af4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{f3f31112-10a1-40b0-af92-470fdf48f349}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\extern\libjpeg\jcarith.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jccoefct.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jccolor.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jcdctmgr.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jchuff.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jcinit.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jcmainct.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jcmarker.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jcmaster.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jcomapi.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jcparam.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jcprepct.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jcsample.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jctrans.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdapimin.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdapistd.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdarith.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdatadst.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdatasrc.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdcoefct.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdcolor.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jddctmgr.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdhuff.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdinput.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdmainct.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdmarker.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdmaster.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdmerge.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdpostct.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdsample.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jdtrans.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jerror.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jfdctflt.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jfdctfst.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jfdctint.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jidctflt.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jidctfst.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jidctint.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jmemmgr.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jmemnobs.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jquant1.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jquant2.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jutils.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jaricom.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jcapimin.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libjpeg\jcapistd.c">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\pngpread.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\pngread.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\pngrio.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\pngrtran.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\pngrutil.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\pngset.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\pngtrans.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\pngwio.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\pngwrite.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\pngwtran.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\pngwutil.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\png.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\pngerror.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\pngget.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libpng\pngmem.c">
+      <Filter>extern\texture\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libzlip\deflate.c">
+      <Filter>extern\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libzlip\infback.c">
+      <Filter>extern\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libzlip\inffast.c">
+      <Filter>extern\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libzlip\inflate.c">
+      <Filter>extern\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libzlip\inftrees.c">
+      <Filter>extern\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libzlip\trees.c">
+      <Filter>extern\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libzlip\uncompr.c">
+      <Filter>extern\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libzlip\zutil.c">
+      <Filter>extern\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libzlip\adler32.c">
+      <Filter>extern\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libzlip\compress.c">
+      <Filter>extern\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libzlip\crc32.c">
+      <Filter>extern\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\Application.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\renderer\win32\GLView.cpp">
+      <Filter>renderer\win32</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\extern\libjpeg\jconfig.h">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libjpeg\jdct.h">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libjpeg\jerror.h">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libjpeg\jinclude.h">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libjpeg\jmemsys.h">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libjpeg\jmorecfg.h">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libjpeg\jpegint.h">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libjpeg\jpeglib.h">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libjpeg\jversion.h">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libjpeg\cderror.h">
+      <Filter>extern\texture\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libpng\png.h">
+      <Filter>extern\texture\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libpng\pngconf.h">
+      <Filter>extern\texture\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libpng\pngpriv.h">
+      <Filter>extern\texture\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libpng\pnglibconf.h">
+      <Filter>extern\texture\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libpng\pnginfo.h">
+      <Filter>extern\texture\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libpng\pngstruct.h">
+      <Filter>extern\texture\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libzlip\crc32.h">
+      <Filter>extern\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libzlip\deflate.h">
+      <Filter>extern\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libzlip\inffast.h">
+      <Filter>extern\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libzlip\inffixed.h">
+      <Filter>extern\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libzlip\inflate.h">
+      <Filter>extern\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libzlip\inftrees.h">
+      <Filter>extern\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libzlip\trees.h">
+      <Filter>extern\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libzlip\zconf.h">
+      <Filter>extern\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libzlip\zlib.h">
+      <Filter>extern\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libzlip\zutil.h">
+      <Filter>extern\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libpng\pngdebug.h">
+      <Filter>extern\texture\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\Application.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\renderer\win32\GLView.h">
+      <Filter>renderer\win32</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\base\Application.cpp" />
+    <ClCompile Include="..\extern\libjpeg\jaricom.c" />
+    <ClCompile Include="..\extern\libjpeg\jcapimin.c" />
+    <ClCompile Include="..\extern\libjpeg\jcapistd.c" />
+    <ClCompile Include="..\extern\libjpeg\jcarith.c" />
+    <ClCompile Include="..\extern\libjpeg\jccoefct.c" />
+    <ClCompile Include="..\extern\libjpeg\jccolor.c" />
+    <ClCompile Include="..\extern\libjpeg\jcdctmgr.c" />
+    <ClCompile Include="..\extern\libjpeg\jchuff.c" />
+    <ClCompile Include="..\extern\libjpeg\jcinit.c" />
+    <ClCompile Include="..\extern\libjpeg\jcmainct.c" />
+    <ClCompile Include="..\extern\libjpeg\jcmarker.c" />
+    <ClCompile Include="..\extern\libjpeg\jcmaster.c" />
+    <ClCompile Include="..\extern\libjpeg\jcomapi.c" />
+    <ClCompile Include="..\extern\libjpeg\jcparam.c" />
+    <ClCompile Include="..\extern\libjpeg\jcprepct.c" />
+    <ClCompile Include="..\extern\libjpeg\jcsample.c" />
+    <ClCompile Include="..\extern\libjpeg\jctrans.c" />
+    <ClCompile Include="..\extern\libjpeg\jdapimin.c" />
+    <ClCompile Include="..\extern\libjpeg\jdapistd.c" />
+    <ClCompile Include="..\extern\libjpeg\jdarith.c" />
+    <ClCompile Include="..\extern\libjpeg\jdatadst.c" />
+    <ClCompile Include="..\extern\libjpeg\jdatasrc.c" />
+    <ClCompile Include="..\extern\libjpeg\jdcoefct.c" />
+    <ClCompile Include="..\extern\libjpeg\jdcolor.c" />
+    <ClCompile Include="..\extern\libjpeg\jddctmgr.c" />
+    <ClCompile Include="..\extern\libjpeg\jdhuff.c" />
+    <ClCompile Include="..\extern\libjpeg\jdinput.c" />
+    <ClCompile Include="..\extern\libjpeg\jdmainct.c" />
+    <ClCompile Include="..\extern\libjpeg\jdmarker.c" />
+    <ClCompile Include="..\extern\libjpeg\jdmaster.c" />
+    <ClCompile Include="..\extern\libjpeg\jdmerge.c" />
+    <ClCompile Include="..\extern\libjpeg\jdpostct.c" />
+    <ClCompile Include="..\extern\libjpeg\jdsample.c" />
+    <ClCompile Include="..\extern\libjpeg\jdtrans.c" />
+    <ClCompile Include="..\extern\libjpeg\jerror.c" />
+    <ClCompile Include="..\extern\libjpeg\jfdctflt.c" />
+    <ClCompile Include="..\extern\libjpeg\jfdctfst.c" />
+    <ClCompile Include="..\extern\libjpeg\jfdctint.c" />
+    <ClCompile Include="..\extern\libjpeg\jidctflt.c" />
+    <ClCompile Include="..\extern\libjpeg\jidctfst.c" />
+    <ClCompile Include="..\extern\libjpeg\jidctint.c" />
+    <ClCompile Include="..\extern\libjpeg\jmemmgr.c" />
+    <ClCompile Include="..\extern\libjpeg\jmemnobs.c" />
+    <ClCompile Include="..\extern\libjpeg\jquant1.c" />
+    <ClCompile Include="..\extern\libjpeg\jquant2.c" />
+    <ClCompile Include="..\extern\libjpeg\jutils.c" />
+    <ClCompile Include="..\extern\libpng\png.c" />
+    <ClCompile Include="..\extern\libpng\pngerror.c" />
+    <ClCompile Include="..\extern\libpng\pngget.c" />
+    <ClCompile Include="..\extern\libpng\pngmem.c" />
+    <ClCompile Include="..\extern\libpng\pngpread.c" />
+    <ClCompile Include="..\extern\libpng\pngread.c" />
+    <ClCompile Include="..\extern\libpng\pngrio.c" />
+    <ClCompile Include="..\extern\libpng\pngrtran.c" />
+    <ClCompile Include="..\extern\libpng\pngrutil.c" />
+    <ClCompile Include="..\extern\libpng\pngset.c" />
+    <ClCompile Include="..\extern\libpng\pngtrans.c" />
+    <ClCompile Include="..\extern\libpng\pngwio.c" />
+    <ClCompile Include="..\extern\libpng\pngwrite.c" />
+    <ClCompile Include="..\extern\libpng\pngwtran.c" />
+    <ClCompile Include="..\extern\libpng\pngwutil.c" />
+    <ClCompile Include="..\extern\libzlip\adler32.c" />
+    <ClCompile Include="..\extern\libzlip\compress.c" />
+    <ClCompile Include="..\extern\libzlip\crc32.c" />
+    <ClCompile Include="..\extern\libzlip\deflate.c" />
+    <ClCompile Include="..\extern\libzlip\infback.c" />
+    <ClCompile Include="..\extern\libzlip\inffast.c" />
+    <ClCompile Include="..\extern\libzlip\inflate.c" />
+    <ClCompile Include="..\extern\libzlip\inftrees.c" />
+    <ClCompile Include="..\extern\libzlip\trees.c" />
+    <ClCompile Include="..\extern\libzlip\uncompr.c" />
+    <ClCompile Include="..\extern\libzlip\zutil.c" />
+    <ClCompile Include="..\renderer\win32\GLView.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\base\Application.h" />
+    <ClInclude Include="..\extern\libjpeg\cderror.h" />
+    <ClInclude Include="..\extern\libjpeg\jconfig.h" />
+    <ClInclude Include="..\extern\libjpeg\jdct.h" />
+    <ClInclude Include="..\extern\libjpeg\jerror.h" />
+    <ClInclude Include="..\extern\libjpeg\jinclude.h" />
+    <ClInclude Include="..\extern\libjpeg\jmemsys.h" />
+    <ClInclude Include="..\extern\libjpeg\jmorecfg.h" />
+    <ClInclude Include="..\extern\libjpeg\jpegint.h" />
+    <ClInclude Include="..\extern\libjpeg\jpeglib.h" />
+    <ClInclude Include="..\extern\libjpeg\jversion.h" />
+    <ClInclude Include="..\extern\libpng\png.h" />
+    <ClInclude Include="..\extern\libpng\pngconf.h" />
+    <ClInclude Include="..\extern\libpng\pngdebug.h" />
+    <ClInclude Include="..\extern\libpng\pnginfo.h" />
+    <ClInclude Include="..\extern\libpng\pnglibconf.h" />
+    <ClInclude Include="..\extern\libpng\pngpriv.h" />
+    <ClInclude Include="..\extern\libpng\pngstruct.h" />
+    <ClInclude Include="..\extern\libzlip\crc32.h" />
+    <ClInclude Include="..\extern\libzlip\deflate.h" />
+    <ClInclude Include="..\extern\libzlip\inffast.h" />
+    <ClInclude Include="..\extern\libzlip\inffixed.h" />
+    <ClInclude Include="..\extern\libzlip\inflate.h" />
+    <ClInclude Include="..\extern\libzlip\inftrees.h" />
+    <ClInclude Include="..\extern\libzlip\trees.h" />
+    <ClInclude Include="..\extern\libzlip\zconf.h" />
+    <ClInclude Include="..\extern\libzlip\zlib.h" />
+    <ClInclude Include="..\extern\libzlip\zutil.h" />
+    <ClInclude Include="..\renderer\win32\GLView.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0B945932-80CC-49C4-B1D4-75841715D8CC}</ProjectGuid>
+    <RootNamespace>LibFramework</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\platforms\win32\include;$(ProjectDir)..\extern\libzlip;$(ProjectDir)..\extern\libpng;$(ProjectDir)..\extern\libjpeg;$(ProjectDir)..\renderer\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MinimalRebuild>false</MinimalRebuild>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\platforms\win32\prebuild\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\platforms\win32\include;$(ProjectDir)..\extern\libzlip;$(ProjectDir)..\extern\libpng;$(ProjectDir)..\extern\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
