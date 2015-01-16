@@ -1,5 +1,6 @@
 #include "base/Application.h"
 #include "GLView.h"
+#include "base/GameObject.h"
 #include <algorithm>
 #include <thread>
 
@@ -16,6 +17,8 @@ Application::Application()
     sm_pSharedApplication = this;
 
 	setAnimationInterval(1/60.0);
+
+	new GameObject();
 }
 
 Application::~Application()

@@ -88,7 +88,7 @@ int DrawGLScene(GLvoid)
 }
 
 GLView::GLView()
-	: mShutDown(false)
+: mShutDown(false), mDC(NULL), mRC(NULL), mWnd(NULL), mInstance(NULL)
 {
 	
 }
