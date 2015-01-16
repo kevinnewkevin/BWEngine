@@ -12,6 +12,8 @@ public:
 	
 	bool processEvents();
 
+	void end();
+
 	HDC			mDC;		// Private GDI Device Context
 	HGLRC		mRC;		// Permanent Rendering Context
 	HWND		mWnd;		// Holds Our Window Handle

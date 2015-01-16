@@ -71,12 +71,16 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 
 int InitGL(GLvoid)										
 {
+	glewInit();
 	glShadeModel(GL_SMOOTH);							
 	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);				
 	glClearDepth(1.0f);									
 	glEnable(GL_DEPTH_TEST);							
 	glDepthFunc(GL_LEQUAL);								
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	
+
+	glActiveTexture(GL_TEXTURE0);
+
 	return TRUE;										
 }
 
@@ -302,10 +306,10 @@ bool GLView::processEvents()
 			DispatchMessage(&msg);				// Dispatch The Message
 		}
 	}
-	else										// If There Are No Messages
-	{
-		DrawGLScene();					// Draw The Scene
-		SwapBuffers(mDC);				// Swap Buffers (Double Buffering)
-	}
 	return true;
+}
+
+void GLView::end()
+{
+	SwapBuffers(mDC);
 }

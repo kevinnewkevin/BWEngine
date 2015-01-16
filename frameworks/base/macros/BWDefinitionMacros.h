@@ -19,3 +19,12 @@
 
 #define SAFE_RELEASE(p) if((p)!=nullptr){p->release();}
 #define SAFE_RETAIN(p) if((p)!=nullptr){p->retain();}
+
+#ifndef __SSIZE_T
+#define __SSIZE_T
+typedef int ssize_t;
+#endif // __SSIZE_T
+
+#define LOG(fmt, ...) printf(fmt "\n", ##__VA_ARGS__)
+
+#define CheckGLError() for (GLint error = glGetError(); error; error = glGetError()) { LOG("err"); }

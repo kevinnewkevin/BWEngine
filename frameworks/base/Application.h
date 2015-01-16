@@ -6,6 +6,7 @@
 #include <assert.h>
 #include <shellapi.h>
 
+class GameObject;
 class Application
 {
 public:
@@ -39,6 +40,8 @@ protected:
 
 	bool _needQuit;
 
+	GameObject* _RootGameObject;
+	
     static Application * sm_pSharedApplication;
 };
 

@@ -3,12 +3,17 @@
 #include "math/vec3.h"
 #include "math/mat4.h"
 #include "base/component/BaseComponent.h"
+#include "base/Vector.h"
 
 class Transform : public BaseComponent
 {
 public:
 	Transform(GameObject* owner = nullptr);
 	virtual ~Transform();
+
+public:
+	virtual void Update(float dt);
+	Vector<Transform*>& getChildren();
 
 public:
 	Vec3& getPosition() { return _position; }
@@ -41,7 +46,7 @@ protected:
 
 	Transform* _parent;
 
-	std::vector<Transform*> _children;
+	Vector<Transform*> _children;
 
 protected:
 	bool _transformDirty = true;

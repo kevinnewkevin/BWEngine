@@ -3,13 +3,25 @@
 
 
 Transform::Transform(GameObject* owner/* = nullptr*/)
-	: BaseComponent(owner)
+: BaseComponent(owner), _scale(vec3(1.0, 1.0, 1.0))
 {
 }
 
 
 Transform::~Transform()
 {
+	_children.clear();
+}
+
+void Transform::Update(float dt)
+{
+	BaseComponent::Update(dt);
+	apply();
+}
+
+Vector<Transform*>& Transform::getChildren()
+{
+	return _children;
 }
 
 void Transform::setPosition(const Vec3 & pos)

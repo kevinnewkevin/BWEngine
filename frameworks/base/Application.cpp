@@ -3,8 +3,11 @@
 #include "base/GameObject.h"
 #include <algorithm>
 #include <thread>
+#include "base/component/Camera.h"
+#include "base/component/SpriteRenderer.h"
 
 Application* Application::sm_pSharedApplication = nullptr;
+static Camera* camera = nullptr;
 
 Application::Application()
 : _instance(nullptr)
@@ -18,7 +21,17 @@ Application::Application()
 
 	setAnimationInterval(1/60.0);
 
-	new GameObject();
+	_RootGameObject = new GameObject();
+	camera = new Camera();
+
+	_RootGameObject->addComponent(camera);
+
+	auto obj = new GameObject();
+	SpriteRenderer* sp = new SpriteRenderer();
+	obj->addComponent(sp);
+	_RootGameObject->addChild(obj);
+
+
 }
 
 Application::~Application()
@@ -42,6 +55,13 @@ void Application::glThread()
     QueryPerformanceCounter(&nLast);
 	GLView openglView;
 	openglView.init("test", 960, 640, 16, false);
+
+	
+		for (GLint error = glGetError(); error; error
+    = glGetError()) {
+		LOG("err");
+    }
+
 	while(!openglView.mShutDown)
     {
         QueryPerformanceCounter(&nNow);
@@ -50,6 +70,13 @@ void Application::glThread()
             nLast.QuadPart = nNow.QuadPart - (nNow.QuadPart % _animationInterval.QuadPart);
             
 			openglView.processEvents();
+
+			_RootGameObject->Update(nNow.QuadPart - nLast.QuadPart);
+
+			glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+				glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+			camera->OnGUI();
+			openglView.end();
         }
         else
         {
@@ -93,6 +120,7 @@ int Application::run()
 
 	std::thread trd(std::bind(&Application::logicThread, this));
 	trd.detach();
+
 
 	// glthread is main thread
 	glThread();

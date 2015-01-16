@@ -2,7 +2,7 @@
 
 #include "vec3.h"
 #include "mat4.h"
-#define quat_PI 3.1415926
+#define QUAT_PI 3.1415926
 
 class quat
 {

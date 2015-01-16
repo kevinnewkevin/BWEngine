@@ -14,9 +14,12 @@
     <ClCompile Include="..\base\Application.cpp" />
     <ClCompile Include="..\base\BaseClass.cpp" />
     <ClCompile Include="..\base\component\BaseComponent.cpp" />
+    <ClCompile Include="..\base\component\Camera.cpp" />
+    <ClCompile Include="..\base\component\SpriteRenderer.cpp" />
     <ClCompile Include="..\base\component\Transform.cpp" />
     <ClCompile Include="..\base\GameObject.cpp" />
     <ClCompile Include="..\base\Ref.cpp" />
+    <ClCompile Include="..\base\ResourceManager.cpp" />
     <ClCompile Include="..\extern\libjpeg\jaricom.c" />
     <ClCompile Include="..\extern\libjpeg\jcapimin.c" />
     <ClCompile Include="..\extern\libjpeg\jcapistd.c" />
@@ -92,6 +95,10 @@
     <ClCompile Include="..\math\mat4.cpp" />
     <ClCompile Include="..\math\quat.cpp" />
     <ClCompile Include="..\math\vec2.cpp" />
+    <ClCompile Include="..\renderer\Image.cpp" />
+    <ClCompile Include="..\renderer\ImageLoader.cpp" />
+    <ClCompile Include="..\renderer\PipelinePT.cpp" />
+    <ClCompile Include="..\renderer\Texture.cpp" />
     <ClCompile Include="..\renderer\win32\GLView.cpp" />
     <ClCompile Include="..\utils\AutoReleasePool.cpp" />
   </ItemGroup>
@@ -99,6 +106,8 @@
     <ClInclude Include="..\base\Application.h" />
     <ClInclude Include="..\base\BaseClass.h" />
     <ClInclude Include="..\base\component\BaseComponent.h" />
+    <ClInclude Include="..\base\component\Camera.h" />
+    <ClInclude Include="..\base\component\SpriteRenderer.h" />
     <ClInclude Include="..\base\component\Transform.h" />
     <ClInclude Include="..\base\GameObject.h" />
     <ClInclude Include="..\base\macros\BWClassMacros.h" />
@@ -107,7 +116,9 @@
     <ClInclude Include="..\base\macros\BWPlatformMacros.h" />
     <ClInclude Include="..\base\MemoryAlloc.h" />
     <ClInclude Include="..\base\Ref.h" />
+    <ClInclude Include="..\base\ResourceManager.h" />
     <ClInclude Include="..\base\Types.h" />
+    <ClInclude Include="..\base\Vector.h" />
     <ClInclude Include="..\extern\libjpeg\cderror.h" />
     <ClInclude Include="..\extern\libjpeg\jconfig.h" />
     <ClInclude Include="..\extern\libjpeg\jdct.h" />
@@ -139,6 +150,10 @@
     <ClInclude Include="..\math\quat.h" />
     <ClInclude Include="..\math\vec2.h" />
     <ClInclude Include="..\math\vec3.h" />
+    <ClInclude Include="..\renderer\Image.h" />
+    <ClInclude Include="..\renderer\ImageLoader.h" />
+    <ClInclude Include="..\renderer\PipelinePT.h" />
+    <ClInclude Include="..\renderer\Texture.h" />
     <ClInclude Include="..\renderer\win32\GLView.h" />
     <ClInclude Include="..\utils\AutoReleasePool.h" />
   </ItemGroup>
