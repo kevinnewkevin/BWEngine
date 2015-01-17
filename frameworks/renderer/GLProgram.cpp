@@ -1,36 +1,25 @@
 #include "renderer/GLProgram.h"
+#include "utils/FileUtils.h"
+#include <regex>
 
-	static const char gVertexShader[] =
-		"attribute vec2 vTexCoord;\n"
-		"attribute vec4 vPosition;\n"
-		"uniform mat4 WVP;\n"
-		"varying vec2 v_texCoord;\n"
-		"void main() {\n"
-		"  gl_Position = WVP*vPosition;\n"
-		"  v_texCoord = vTexCoord;\n"
-    "}\n";
+using namespace std;
 
-	static const char gFragmentShader[] =
-		"precision mediump float;\n"
-		"uniform sampler2D texture1;"
-		"varying vec2 v_texCoord;\n"
-		"void main() {\n"
-		"   gl_FragColor = texture2D(texture1, v_texCoord);\n"
-		//"   gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);\n"
-		"}\n";
-	
-	void uglCheckError(const char* op) {
-		for (GLint error = glGetError(); error; error
-			= glGetError()) {
-		}
-	}
 
-GLuint uglLoadShader(GLenum shaderType, const char* source)
+struct ShaderPass {
+	string vert;
+	string frag;
+};
+
+struct ShaderBlock {
+	vector<ShaderPass> passes;
+};
+
+GLuint GLProgram::loadShaderWithType(GLenum shaderType, const char* source)
 {
 	GLuint shader = glCreateShader(shaderType);
 	if (shader)
 	{
-		glShaderSource(shader, 1, &source, NULL);
+		glShaderSource(shader, 1, &source, nullptr);
 		glCompileShader(shader);
 		GLint compiled = 0;
         glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
@@ -41,8 +30,7 @@ GLuint uglLoadShader(GLenum shaderType, const char* source)
                 char* buf = (char*) malloc(infoLen);
                 if (buf) {
                     glGetShaderInfoLog(shader, infoLen, NULL, buf);
-					LOG("Could not compile shader %d:\n%s\n",
-                            shaderType, buf);
+					LOG("Could not compile shader %d:\n%s\n", shaderType, buf);
                     free(buf);
                 }
                 glDeleteShader(shader);
@@ -53,13 +41,15 @@ GLuint uglLoadShader(GLenum shaderType, const char* source)
     return shader;
 }
 
-GLuint uglCreateProgram(const char* pVertexSource, const char* pFragmentSource) {
-	GLuint vertexShader = uglLoadShader(GL_VERTEX_SHADER, pVertexSource);
+GLuint GLProgram::initWithContent(const char* pVertexSource, const char* pFragmentSource) 
+{
+	LOG("%s\n\n%s", pVertexSource, pFragmentSource);
+	GLuint vertexShader = loadShaderWithType(GL_VERTEX_SHADER, pVertexSource);
 	if (!vertexShader) {
 		return 0;
 	}
 
-	GLuint pixelShader = uglLoadShader(GL_FRAGMENT_SHADER, pFragmentSource);
+	GLuint pixelShader = loadShaderWithType(GL_FRAGMENT_SHADER, pFragmentSource);
 	if (!pixelShader) {
 		return 0;
 	}
@@ -67,9 +57,9 @@ GLuint uglCreateProgram(const char* pVertexSource, const char* pFragmentSource) 
 	GLuint program = glCreateProgram();
 	if (program) {
 		glAttachShader(program, vertexShader);
-		uglCheckError("glAttachShader");
+		CheckGLError("glAttachShader");
 		glAttachShader(program, pixelShader);
-		uglCheckError("glAttachShader");
+		CheckGLError("glAttachShader");
 		glLinkProgram(program);
 		GLint linkStatus = GL_FALSE;
 		glGetProgramiv(program, GL_LINK_STATUS, &linkStatus);
@@ -91,6 +81,102 @@ GLuint uglCreateProgram(const char* pVertexSource, const char* pFragmentSource) 
 	return program;
 }
 
+void readSpace(unsigned char* &bytes)
+{
+	while (isspace(*bytes)) ++bytes;
+}
+
+void readContent(unsigned char* &bytes, string& pass, string endWith)
+{
+	char* ptr = strstr((char*)bytes, endWith.c_str());
+	if (ptr != nullptr)
+	{
+		ssize_t len = ptr - (char*)bytes;
+		pass.assign((char*)bytes, len);
+		bytes += len;
+	}
+}
+
+void readPass(unsigned char* &bytes, ShaderPass& pass)
+{
+	string passName, attrName;
+	readSpace(bytes);
+	while (!isspace(*bytes)) passName += *bytes++;
+	readSpace(bytes);
+	if (*bytes != '{') return ; ++bytes; // avoid '{'
+	readSpace(bytes);
+	while (!isspace(*bytes)) attrName += *bytes++;
+	readSpace(bytes);
+	if (*bytes != '=') return; ++bytes; // avoid '='
+	readSpace(bytes);
+	if (bytes[0] != '[' && bytes[1] != '[') return; bytes += 2; // avoid '[['
+	if (attrName == "vert") readContent(bytes, pass.vert, "]]");
+	else readContent(bytes, pass.frag, "]]");
+	bytes += 2; // avoid ']]'
+
+	attrName.assign("");
+	readSpace(bytes);
+	while (!isspace(*bytes)) attrName += *bytes++;
+	readSpace(bytes);
+	if (*bytes != '=') return; ++bytes; // avoid '='
+	readSpace(bytes);
+	if (bytes[0] != '[' && bytes[1] != '[') return; bytes += 2; // avoid '[['
+	if (attrName == "vert") readContent(bytes, pass.vert, "]]");
+	else readContent(bytes, pass.frag, "]]");
+	bytes += 2; // avoid ']]'
+	readSpace(bytes);
+	if (*bytes != '}') return ; ++bytes; // avoid '}'
+}
+
+bool readBlock(unsigned char* &bytes, ShaderBlock& block, unsigned char* end)
+{
+	readSpace(bytes);
+	if (!isalnum(*bytes)) return false;
+
+	string attrName;
+	while (!isspace(*bytes)) attrName += *bytes++;
+	readSpace(bytes);
+	if (attrName == "pass")
+	{
+		ShaderPass pass;
+		readPass(bytes, pass);
+		block.passes.push_back(pass);
+	}
+	return true;
+}
+
+GLuint GLProgram::initWithFile(const char* shaderFile)
+{
+	Data shader = FileUtils::getInstance()->getDataFromFile(shaderFile);
+	unsigned char* bytes = shader.getBytes();
+	return initWithContent(bytes, shader.getSize());
+}
+
+GLuint GLProgram::initWithContent(unsigned char* bytes, int size/* = 0*/)
+{
+	unsigned char* end = size == 0 ? nullptr : bytes + size;
+	readSpace(bytes);
+	if (*bytes != '"') return 0;  ++bytes; // avoid '"'
+	string shaderName;
+	while (*bytes != '"') shaderName += *bytes++; ++bytes; // avoid '"'
+	readSpace(bytes);
+	if (*bytes != ':') return 0; ++bytes; // avoid ':'
+	readSpace(bytes);
+	if (*bytes != '{') return 0; ++bytes; // avoid '{'
+	readSpace(bytes);
+	ShaderBlock block;
+	while (readBlock(bytes, block, end));
+	readSpace(bytes);
+	if (*bytes != '}') return 0; ++bytes; // avoid '}'
+	return initWithContent(block.passes[0].vert.c_str(), block.passes[0].frag.c_str());
+}
+
+GLuint GLProgram::initWithFile(const char* frag, const char* vert)
+{
+	string f = FileUtils::getInstance()->getStringFromFile(frag);
+	string v = FileUtils::getInstance()->getStringFromFile(vert);
+	return initWithContent(f.c_str(), v.c_str());
+}
 
 GLProgram::GLProgram()
 {
@@ -103,9 +189,9 @@ GLProgram::~GLProgram()
 
 void GLProgram::init()
 {
-	program = uglCreateProgram(gVertexShader, gFragmentShader);
+	program = initWithFile("shaders/default.shader");
 	
-	worldLocation = glGetUniformLocation(program, "WVP");
+	worldLocation = glGetUniformLocation(program, "MVP");
 	sampler	= glGetUniformLocation(program, "texture1");
 
 	glActiveTexture(GL_TEXTURE0);

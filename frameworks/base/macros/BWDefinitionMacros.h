@@ -30,4 +30,4 @@ typedef int ssize_t;
 
 #define LOG(fmt, ...) printf(fmt "\n", ##__VA_ARGS__)
 
-#define CheckGLError() for (GLint error = glGetError(); error; error = glGetError()) { LOG("err"); }
+#define CheckGLError(msg) for (GLint error = glGetError(); error; error = glGetError()) { LOG("err"); }

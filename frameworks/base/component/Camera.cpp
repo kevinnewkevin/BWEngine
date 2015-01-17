@@ -3,11 +3,11 @@
 #include "base/GameObject.h"
 #include "math/quat.h"
 #include <vector>
-#include "renderer/PipelinePT.h"
+#include "renderer/GLProgram.h"
 #include "gl/glew.h"
 using std::vector;
 
-PipelinePT pipe;
+GLProgram program;
 Camera::Camera()
 {
 
@@ -20,7 +20,7 @@ Camera::~Camera()
 
 void Camera::Start()
 {
-	pipe.init();
+	program.init();
 
 	gameObject->getTransform()->setPosition(Vec3(0, 0, 700));
 	_LookAtMatrix.buildLookAt(Vec3(0, 0, -1), Vec3(0, 0, 0), Vec3(0, 1, 0));
@@ -51,14 +51,14 @@ void Camera::OnGUI()
 	CheckGLError();
 	Mat4 mat;
 	mat = _PerspectiveMatrix * _LookAtMatrix * gameObject->getTransform()->apply();
-	glUseProgram(pipe.mProgram);
+	glUseProgram(program.program);
 
 	for (unsigned int i = 0; i < _RenderObject.size(); ++i)
 	{
 		GameObject* obj = _RenderObject[i];
 		Mat4 m = obj->getTransform()->apply();
 		Mat4 mvp = mat*obj->getTransform()->apply();
-		glUniformMatrix4fv(pipe.mWorldLocation, 1, GL_FALSE, &mvp.m[0]);
+		glUniformMatrix4fv(program.worldLocation, 1, GL_FALSE, &mvp.m[0]);
 
 		CheckGLError();
 
