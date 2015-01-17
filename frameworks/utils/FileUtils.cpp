@@ -4,7 +4,6 @@
 #include <Shlobj.h>
 
 // The root path of resources, the character encoding is UTF-8.
-// UTF-8 is the only encoding supported by cocos2d-x API.
 static std::string s_resourcePath = "";
 
 static FileUtils* gs_instance = nullptr;
