@@ -22,8 +22,8 @@ void Camera::Start()
 {
 	program.init();
 
-	gameObject->getTransform()->setPosition(Vec3(0, 0, 700));
-	_LookAtMatrix.buildLookAt(Vec3(0, 0, -1), Vec3(0, 0, 0), Vec3(0, 1, 0));
+	gameObject->getTransform()->setPosition(Vec3(0, 200, 0));
+	_LookAtMatrix.buildLookAt(Vec3(0, 0, 700), Vec3(0, 0, 0), Vec3(0, 1, 0));
 
 	_PerspectiveMatrix.buildPerspectiveProjection((float)QUAT_PI / 3, 800 / 600, 1, 1000);
 
@@ -50,14 +50,18 @@ void Camera::OnGUI()
 {
 	CheckGLError();
 	Mat4 mat;
-	mat = _PerspectiveMatrix * _LookAtMatrix * gameObject->getTransform()->apply();
+	Mat4 cameraTrans = gameObject->getTransform()->apply();
+	cameraTrans.m[12] *= -1;
+	cameraTrans.m[13] *= -1;
+	cameraTrans.m[14] *= -1;
+	mat = _PerspectiveMatrix * _LookAtMatrix * cameraTrans;
 	glUseProgram(program.program);
 
 	for (unsigned int i = 0; i < _RenderObject.size(); ++i)
 	{
 		GameObject* obj = _RenderObject[i];
 		Mat4 m = obj->getTransform()->apply();
-		Mat4 mvp = mat*obj->getTransform()->apply();
+		Mat4 mvp = mat*m;
 		glUniformMatrix4fv(program.worldLocation, 1, GL_FALSE, &mvp.m[0]);
 
 		CheckGLError();
@@ -68,5 +72,4 @@ void Camera::OnGUI()
 			comp->OnGUI();
 		}
 	}
-	glUseProgram(0);
 }

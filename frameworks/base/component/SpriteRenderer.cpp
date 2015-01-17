@@ -49,10 +49,10 @@ void SpriteRenderer::OnGUI()
 
 	float width = _texture->getSize().width, height = _texture->getSize().height;
 	Vec3 vertices[] = {
-		Vec3(0,  0, 0),
-		Vec3(width,   0, 0),
-		Vec3(width,  height, 0),
-		Vec3(0,   height, 0),
+		Vec3(0,		0,		0),
+		Vec3(width, 0,		0),
+		Vec3(width, height, 0),
+		Vec3(0,		height, 0),
 	};
 	Vec2 texCoords[] = { 
 		Vec2(0, 0),

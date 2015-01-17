@@ -54,13 +54,10 @@ void Application::glThread()
     QueryPerformanceFrequency(&nFreq);
     QueryPerformanceCounter(&nLast);
 	GLView openglView;
-	openglView.init("test", 960, 640, 16, false);
+	openglView.init("test", 800, 600, 16, false);
 
 	
-		for (GLint error = glGetError(); error; error
-    = glGetError()) {
-		LOG("err");
-    }
+	CheckGLError();
 
 	while(!openglView.mShutDown)
     {
