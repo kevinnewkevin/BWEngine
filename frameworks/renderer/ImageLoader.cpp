@@ -84,13 +84,12 @@ bool loadImagePNG( const char *file, Image& i)
     GLubyte **rowPointers = new GLubyte*[i._height]; 
 
     // set up the row pointers
-    for ( int ii = 0;  ii < i._height; ii++) {
-        rowPointers[ii] = data + ii*rowBytes;
-    }
+    for (int ii = i._height - 1; ii >= 0; ii--) {
+		rowPointers[ii] = data + (i._height - ii - 1)*rowBytes;
+	}
 
     // read the image
     png_read_image(png_ptr, rowPointers);
-
 
     // reading is complete, configure other parameters
 
@@ -130,6 +129,5 @@ bool loadImagePNG( const char *file, Image& i)
     i._levelCount = 1;
     i._faces = 0;
     i._depth = 0;
-	i.flipSurface();
     return true;
 }

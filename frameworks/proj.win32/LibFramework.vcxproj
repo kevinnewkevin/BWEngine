@@ -100,7 +100,6 @@
     <ClCompile Include="..\renderer\GLProgram.cpp" />
     <ClCompile Include="..\renderer\Image.cpp" />
     <ClCompile Include="..\renderer\ImageLoader.cpp" />
-    <ClCompile Include="..\renderer\PipelinePT.cpp" />
     <ClCompile Include="..\renderer\Texture.cpp" />
     <ClCompile Include="..\renderer\win32\GLView.cpp" />
     <ClCompile Include="..\utils\AutoReleasePool.cpp" />
@@ -159,7 +158,6 @@
     <ClInclude Include="..\renderer\GLProgram.h" />
     <ClInclude Include="..\renderer\Image.h" />
     <ClInclude Include="..\renderer\ImageLoader.h" />
-    <ClInclude Include="..\renderer\PipelinePT.h" />
     <ClInclude Include="..\renderer\Texture.h" />
     <ClInclude Include="..\renderer\win32\GLView.h" />
     <ClInclude Include="..\utils\AutoReleasePool.h" />
