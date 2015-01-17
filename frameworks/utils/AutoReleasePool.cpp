@@ -46,4 +46,5 @@ void AutoReleasePool::clear()
 		(*iter)->release();
 		++iter;
 	}
+	_list.clear();
 }

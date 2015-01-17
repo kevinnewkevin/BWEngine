@@ -19,6 +19,9 @@
 
 #define SAFE_RELEASE(p) if((p)!=nullptr){p->release();}
 #define SAFE_RETAIN(p) if((p)!=nullptr){p->retain();}
+#define BREAK_IF(cond) if(cond) break
+
+#define ASSERT(p, msg) assert(p)
 
 #ifndef __SSIZE_T
 #define __SSIZE_T

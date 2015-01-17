@@ -1,5 +1,6 @@
 #pragma once
 #include "base/Ref.h"
+#include "base/Vector.h"
 
 class AutoReleasePool
 {

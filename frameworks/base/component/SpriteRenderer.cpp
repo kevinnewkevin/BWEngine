@@ -21,7 +21,7 @@ void SpriteRenderer::Awake()
 void SpriteRenderer::Start()
 {
 	//_texture = ResourceManager::getInstance()->addTexture("E:/MyCode/BWEngine/tests/Resources/img2_2.png");
-	_texture = ResourceManager::getInstance()->addTexture("F:/SVN/support/Mobilephone_SG/branches/BWEngine/tests/Resources/img2_2.png");
+	_texture = ResourceManager::getInstance()->addTexture("img2_2.png");
 
 	glEnable(GL_TEXTURE_2D);
 }

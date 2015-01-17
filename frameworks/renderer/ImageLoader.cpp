@@ -1,59 +1,38 @@
 #include "png.h"
 #include "Image.h"
 #include <stdio.h>
+#include "utils/FileUtils.h"
 
 static void pngReadFn( png_structp png_ptr, png_bytep data, png_size_t length) {
-    FILE* fp = (FILE*)png_get_io_ptr(png_ptr);
+	Data* fp = (Data*)png_get_io_ptr(png_ptr);
 
     if (!data)
         png_error( png_ptr, "Attempt to read from null file pointer");
-
-    fread( data, length, 1, fp);
-}
-
-static void pngWriteFn( png_structp png_ptr, png_bytep data, png_size_t length) {
-    FILE* fp = (FILE*)png_get_io_ptr(png_ptr);
-
-    if (!data)
-        png_error( png_ptr, "Attempt to write to null file pointer");
-
-    fwrite( data, length, 1, fp);
-}
-
-static void pngFlushFn( png_structp png_ptr) {
-    FILE* fp = (FILE*)png_get_io_ptr(png_ptr);
-
-    fflush(fp);
+	fp->readBytes(data, length);
 }
 
 bool loadImagePNG( const char *file, Image& i) 
 {
-    FILE *fp = fopen( file, "rb");
-
-    if ( !fp)
-        return false;
+	Data dataSource = FileUtils::getInstance()->getDataFromFile(file);
 
     GLubyte signature[8];
-    fread( signature, 8, 1, fp);
+	dataSource.readBytes(signature, 8);
 
     png_structp png_ptr = NULL;
     png_infop info_ptr = NULL;
 
     if (!png_check_sig( signature, 8)) {
-        fclose(fp);
         return false;
     }
 
     png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
     if (!png_ptr) {
-        fclose(fp);
         return false;   /* out of memory */
     }
 
     info_ptr = png_create_info_struct(png_ptr);
     if (!info_ptr) {
         png_destroy_read_struct(&png_ptr, NULL, NULL);
-        fclose(fp);
         return false;   /* out of memory */
     }
 
@@ -61,12 +40,11 @@ bool loadImagePNG( const char *file, Image& i)
 
     if (setjmp(png_jmpbuf(png_ptr))) {
         png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
-        fclose(fp);
         return false;
     }
 
     // Need to override the standard I/O methods since libPNG may be linked against a different run-time
-    png_set_read_fn( png_ptr, fp, pngReadFn);
+    png_set_read_fn( png_ptr, &dataSource, pngReadFn);
 
     png_set_sig_bytes(png_ptr, 8);  // skip the sig bytes
 
@@ -80,7 +58,6 @@ bool loadImagePNG( const char *file, Image& i)
 
     if (setjmp(png_jmpbuf(png_ptr))) { 
         png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
-        fclose(fp);
         return false;
     }
 
@@ -147,7 +124,6 @@ bool loadImagePNG( const char *file, Image& i)
 
     png_read_end(png_ptr, NULL);
     png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
-    fclose(fp);
 
     //finalize parameters
     i._data.push_back( data);
@@ -155,6 +131,5 @@ bool loadImagePNG( const char *file, Image& i)
     i._faces = 0;
     i._depth = 0;
 	i.flipSurface();
-    
     return true;
 }
