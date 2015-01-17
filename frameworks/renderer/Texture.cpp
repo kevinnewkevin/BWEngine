@@ -30,6 +30,9 @@ bool Texture::initWithImage(Image* i)
 
 		_pixelsWide = i->_width;
 		_pixelsHigh = i->_height;
+		_contentSize.width = _pixelsWide;
+		_contentSize.height = _pixelsHigh;
+
         glTexImage2D(GL_TEXTURE_2D, 0, i->_internalFormat, (GLsizei)_pixelsWide, (GLsizei)_pixelsHigh, 0, i->_format, i->_type, i->getLevel(0));
 		return true;
     }
@@ -43,4 +46,14 @@ void Texture::begin()
 void Texture::end()
 {
 	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+GLuint Texture::getName()
+{
+	return _name;
+}
+
+const Size & Texture::getSize()
+{
+	return _contentSize;
 }

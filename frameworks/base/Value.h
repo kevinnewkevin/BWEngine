@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include "math/vec2.h"
 
 class Value;
 
@@ -123,4 +124,21 @@ private:
     }_field;
 
     Type _type;
+};
+
+struct Size {
+	float width = 0, height = 0;
+	Size(){}
+	Size(float w, float h) : width(w), height(h) {}
+	Size(const Size& s) : width(s.width), height(s.height) {}
+	Size(const Vec2& v) : width(v.x), height(v.y) {}
+};
+
+struct Rect {
+	float x = 0, y = 0;
+	float width = 0, height = 0;
+	Rect(){}
+	Rect(float x, float y, float w, float h) : x(x), y(y), width(w), height(h) {}
+	Rect(const Rect& v) : x(v.x), y(v.y), width(v.width), height(v.height) {}
+	Rect(const Vec2& v, const Size& s) : x(v.x), y(v.y), width(s.width), height(s.height) {}
 };

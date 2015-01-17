@@ -1,6 +1,6 @@
 #pragma once
 #include "gl/glew.h"
-#include "math/vec2.h"
+#include "base/Value.h"
 
 class  Image;
 
@@ -15,6 +15,10 @@ public:
 	void begin();
 
 	void end();
+
+	GLuint getName();
+	const Size& getSize();
+
 private:
 
     int _pixelsWide;
@@ -28,7 +32,7 @@ private:
     
     GLfloat _maxT;
 
-    Vec2 _contentSize;
+    Size _contentSize;
 
     bool _hasPremultipliedAlpha;
 
