@@ -65,6 +65,14 @@ void BaseComponent::Update(float dt)
 	}
 	else
 	{
+		if (_enable)
+		{
+			OnEnable();
+		}
+		else
+		{
+			OnDisable();
+		}
 		Start();
 		_isStarted = true;
 	}

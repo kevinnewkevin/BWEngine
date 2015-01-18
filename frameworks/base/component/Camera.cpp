@@ -3,11 +3,10 @@
 #include "base/GameObject.h"
 #include "math/quat.h"
 #include <vector>
-#include "renderer/GLProgram.h"
+#include "renderer/GLProgramCache.h"
 #include "gl/glew.h"
 using std::vector;
 
-GLProgram program;
 Camera::Camera()
 {
 
@@ -20,8 +19,6 @@ Camera::~Camera()
 
 void Camera::Start()
 {
-	program.init();
-
 	gameObject->getTransform()->setPosition(Vec3(0, 200, 0));
 	_LookAtMatrix.buildLookAt(Vec3(0, 0, 700), Vec3(0, 0, 0), Vec3(0, 1, 0));
 
@@ -37,11 +34,12 @@ void Camera::traverse(Transform* t)
 {
 	for (unsigned int i = 0; i < t->getChildren().size(); ++i)
 	{
-		//if ( need render)
+		auto child = t->getChildren().at(i);
+		//if (child->canDraw())
 		{
-			GameObject* p = t->getChildren().at(i)->gameObject;
-			_RenderObject.push_back(p);
-			traverse(p->getTransform());
+			GameObject* obj = t->getChildren().at(i)->gameObject;
+			_RenderObject.push_back(obj);
+			traverse(obj->getTransform());
 		}
 	}
 }
@@ -49,21 +47,22 @@ void Camera::traverse(Transform* t)
 void Camera::OnGUI()
 {
 	CheckGLError();
-	Mat4 mat;
+	Mat4 VP;
 	Mat4 cameraTrans = gameObject->getTransform()->apply();
 	cameraTrans.m[12] *= -1;
 	cameraTrans.m[13] *= -1;
 	cameraTrans.m[14] *= -1;
-	mat = _PerspectiveMatrix * _LookAtMatrix * cameraTrans;
-	glUseProgram(program.program);
+	VP = _PerspectiveMatrix * _LookAtMatrix * cameraTrans;
 
+	auto program = GLProgramCache::getInstance()->getGLProgram(GLProgramCache::NAME::POSITION_TEXTURE);
+	program->use();
 	for (unsigned int i = 0; i < _RenderObject.size(); ++i)
 	{
 		GameObject* obj = _RenderObject[i];
-		Mat4 m = obj->getTransform()->apply();
-		Mat4 mvp = mat*m;
-		glUniformMatrix4fv(program.worldLocation, 1, GL_FALSE, &mvp.m[0]);
+		Mat4 M = obj->getTransform()->apply();
+		Mat4 mvp = VP*M;
 
+		program->setUniformsForBuiltins(mvp);
 		CheckGLError();
 
 		auto& components = obj->getComponents();

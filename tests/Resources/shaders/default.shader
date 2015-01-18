@@ -1,25 +1,23 @@
-"default" : {
+"POSITION_TEXTURE" : {
 	pass default {
 
 		vert = [[
-			attribute vec2 vTexCoord;
-			attribute vec4 vPosition;
-			uniform mat4 MVP;
+			attribute vec2 a_texCoord;
+			attribute vec4 a_position;
 			varying vec2 v_texCoord;
 			void main() 
 			{
-				gl_Position = MVP*vPosition;
-				v_texCoord = vTexCoord;
+				gl_Position = MVPMatrix * a_position;
+				v_texCoord = a_texCoord;
 			}
 		]]
 
 		frag = [[
 			precision mediump float;
-			uniform sampler2D texture1;
 			varying vec2 v_texCoord;
 			void main() 
 			{
-				gl_FragColor = texture2D(texture1, v_texCoord);
+				gl_FragColor = texture2D(Texture0, v_texCoord);
 			}
 		]]
 	}

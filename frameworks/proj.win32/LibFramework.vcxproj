@@ -98,6 +98,7 @@
     <ClCompile Include="..\math\quat.cpp" />
     <ClCompile Include="..\math\vec2.cpp" />
     <ClCompile Include="..\renderer\GLProgram.cpp" />
+    <ClCompile Include="..\renderer\GLProgramCache.cpp" />
     <ClCompile Include="..\renderer\Image.cpp" />
     <ClCompile Include="..\renderer\ImageLoader.cpp" />
     <ClCompile Include="..\renderer\Texture.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="..\math\vec2.h" />
     <ClInclude Include="..\math\vec3.h" />
     <ClInclude Include="..\renderer\GLProgram.h" />
+    <ClInclude Include="..\renderer\GLProgramCache.h" />
     <ClInclude Include="..\renderer\Image.h" />
     <ClInclude Include="..\renderer\ImageLoader.h" />
     <ClInclude Include="..\renderer\Texture.h" />

@@ -40,6 +40,7 @@ bool Texture::initWithImage(Image* i)
 
 void Texture::begin()
 {
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _name);
 }
 
