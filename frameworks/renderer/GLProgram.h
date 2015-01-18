@@ -86,7 +86,7 @@ public:
 
 public:
 	GLProgram();
-	~GLProgram();
+	virtual ~GLProgram();
 
 	bool init();
 	bool initWithFile(const char* shaderFile);
@@ -164,7 +164,6 @@ protected:
 		unsigned int usesMV : 1;
 		unsigned int usesP : 1;
 		unsigned int usesRandom : 1;
-		// handy way to initialize the bitfield
 		flag_struct() { memset(this, 0, sizeof(*this)); }
 	} _flags;
 

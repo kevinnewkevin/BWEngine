@@ -21,7 +21,7 @@ public:
 
     GLProgramCache();
 
-    ~GLProgramCache();
+	virtual ~GLProgramCache();
 
     static GLProgramCache* getInstance();
 

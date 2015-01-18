@@ -9,7 +9,7 @@ public:
 	static void purge();
 
 	AutoReleasePool();
-	~AutoReleasePool();
+	virtual ~AutoReleasePool();
 
 	void add(Ref* obj);
 	void remove(Ref* obj);

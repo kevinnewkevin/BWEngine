@@ -8,7 +8,7 @@ class Texture
 {
 public:
 	Texture() {}
-	~Texture() {}
+	virtual ~Texture() {}
 	
 	bool initWithImage(Image* i);
 

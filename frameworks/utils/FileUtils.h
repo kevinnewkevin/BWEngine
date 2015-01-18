@@ -4,7 +4,7 @@
 #include "base/Vector.h"
 #include "base/Value.h"
 
-class FileUtils : Ref
+class FileUtils : public Ref
 {
 public:
 	static FileUtils* getInstance();
