@@ -22,6 +22,7 @@ struct Uniform
 
 class GLProgram : public Ref
 {
+	friend class Material;
 public:
 	GLuint program = 0;
 	GLuint vertShader = 0;

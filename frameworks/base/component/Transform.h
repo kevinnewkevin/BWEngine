@@ -2,6 +2,7 @@
 #include "base/Ref.h"
 #include "math/vec3.h"
 #include "math/mat4.h"
+#include "math/quat.h"
 #include "base/component/BaseComponent.h"
 #include "base/Vector.h"
 
@@ -21,9 +22,10 @@ public:
 
 	Vec3& getScale() { return _scale; }
 	void setScale(const Vec3& scale);
+	void setScale(float scale);
 
-	Vec3& getRotation() { return _rotation; }
-	void setRotation(const Vec3& rot);
+	Quat& getRotation() { return _rotation; }
+	void setRotation(const Quat& rot);
 
 	Vec3& getLocalPosition() { return _localPosition; }
 	void setLocalPosition(const Vec3& pos);
@@ -31,8 +33,8 @@ public:
 	Vec3& getLocalScale() { return _localScale; }
 	void setLocalScale(const Vec3& scale);
 
-	Vec3& getLocalRotation() { return _localRotation; }
-	void setLocalRotation(const Vec3& rot);
+	Quat& getLocalRotation() { return _localRotation; }
+	void setLocalRotation(const Quat& rot);
 
 	Transform* getParent() { return _parent; }
 	void setParent(Transform* parent);
@@ -41,7 +43,7 @@ public:
 protected:
 	Vec3 _position, _localPosition;
 	Vec3 _scale, _localScale;
-	Vec3 _rotation, _localRotation;
+	Quat _rotation, _localRotation;
 	Mat4 _modleMatrix;
 
 	Transform* _parent;

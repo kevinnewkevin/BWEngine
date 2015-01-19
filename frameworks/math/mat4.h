@@ -13,16 +13,18 @@
 		|3  7 11 15|
 */
 
-typedef class mat4
+class Quat;
+
+class Mat4
 {
 public:
-	mat4() { makeIdentity(); }
-	mat4(float m11, float m12, float m13, float m14, float m21, float m22, float m23, float m24,
+	Mat4() { makeIdentity(); }
+	Mat4(float m11, float m12, float m13, float m14, float m21, float m22, float m23, float m24,
 		float m31, float m32, float m33, float m34, float m41, float m42, float m43, float m44);
-	~mat4() {}
+	~Mat4() {}
 
-	inline mat4 operator*(const mat4& mat);
-	inline mat4& operator*=(const mat4& mat);
+	inline Mat4 operator*(const Mat4& mat);
+	inline Mat4& operator*=(const Mat4& mat);
 
 	/**
 	* Sets the values of this matrix.
@@ -47,12 +49,12 @@ public:
 	void set(float m11, float m12, float m13, float m14, float m21, float m22, float m23, float m24,
 		float m31, float m32, float m33, float m34, float m41, float m42, float m43, float m44);
 
-	void mat4::set(const float* mat)
+	void Mat4::set(const float* mat)
 	{
 		memcpy(this->m, mat, MATRIX_SIZE);
 	}
 
-	void mat4::set(const mat4& mat)
+	void Mat4::set(const Mat4& mat)
 	{
 		memcpy(this->m, mat.m, MATRIX_SIZE);
 	}
@@ -63,14 +65,15 @@ public:
 	void setScale(float x, float y, float z);
 	void multiplyWith1x4Matrix(float *mat);
 
-	mat4 inverse();
-	mat4 buildLookAt(vec3 position, vec3 target, vec3 up);
+	Mat4 inverse();
+	Mat4 buildLookAt(Vec3 position, Vec3 target, Vec3 up);
 
-	void buildTranslate(const vec3& v);
+	void buildTranslate(const Vec3& v);
 	void buildTranslate(float x, float y, float z);
-	void buildScale(const vec3& v);
+	void buildScale(const Vec3& v);
 	void buildScale(float x, float y, float z);
-	void buildRotation(const vec3& v);
+	void buildRotation(const Vec3& v);
+	void buildRotation(const Quat& q);
 	void buildRotation(float x, float y, float z);
 	void buildRotationX(float angle);
 	void buildRotationY(float angle);
@@ -79,8 +82,8 @@ public:
 	float m[16];
 
 	/** equals to a matrix full of zeros */
-	static const mat4 ZERO;
+	static const Mat4 ZERO;
 	/** equals to the identity matrix */
-	static const mat4 IDENTITY;
+	static const Mat4 IDENTITY;
 
-}Mat4;
+};

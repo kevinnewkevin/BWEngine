@@ -29,7 +29,7 @@ public:
 
 	virtual void setAnimationInterval(double interval);
 
-	virtual void initGLContextAttrs() {}
+	virtual void initGLContextAttrs();
 
 protected:
     HINSTANCE           _instance;

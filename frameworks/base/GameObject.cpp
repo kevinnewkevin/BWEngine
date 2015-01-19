@@ -16,10 +16,14 @@ GameObject::GameObject(const char* name/* = nullptr*/)
 GameObject::~GameObject()
 {
 	_comps.clear();
+
+	updateCallback = nullptr;
 }
 
 void GameObject::Update(float dt)
 {
+	if (updateCallback != nullptr) updateCallback(dt);
+
 	auto compsLen = _comps.size();
 	if (compsLen > 1)
 	{
@@ -41,16 +45,6 @@ void GameObject::Update(float dt)
 			auto child = children.at(idx)->gameObject;
 			child->Update(dt);
 		}
-
-		// draw
-	//	for (ssize_t idx = 1; idx < compsLen; ++idx)
-	//	{
-	//		auto comp = _comps.at(idx);
-	//		if (comp->canDraw())
-	//		{
-	//			comp->OnGUI();
-	//		}
-	//	}
 	}
 }
 

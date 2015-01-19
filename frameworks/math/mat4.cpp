@@ -1,24 +1,25 @@
 #include "mat4.h"
+#include "quat.h"
 
-const mat4 mat4::IDENTITY = mat4(
+const Mat4 Mat4::IDENTITY = Mat4(
 	1.0f, 0.0f, 0.0f, 0.0f,
 	0.0f, 1.0f, 0.0f, 0.0f,
 	0.0f, 0.0f, 1.0f, 0.0f,
 	0.0f, 0.0f, 0.0f, 1.0f);
 
-const mat4 mat4::ZERO = mat4(
+const Mat4 Mat4::ZERO = Mat4(
 	0, 0, 0, 0,
 	0, 0, 0, 0,
 	0, 0, 0, 0,
 	0, 0, 0, 0);
 
 
-mat4::mat4(float m11, float m12, float m13, float m14, float m21, float m22, float m23, float m24, float m31, float m32, float m33, float m34, float m41, float m42, float m43, float m44)
+Mat4::Mat4(float m11, float m12, float m13, float m14, float m21, float m22, float m23, float m24, float m31, float m32, float m33, float m34, float m41, float m42, float m43, float m44)
 {
 	set(m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44);
 }
 
-void mat4::set(float m11, float m12, float m13, float m14, float m21, float m22, float m23, float m24, float m31, float m32, float m33, float m34, float m41, float m42, float m43, float m44)
+void Mat4::set(float m11, float m12, float m13, float m14, float m21, float m22, float m23, float m24, float m31, float m32, float m33, float m34, float m41, float m42, float m43, float m44)
 {
 	m[0] = m11;
 	m[1] = m21;
@@ -38,13 +39,13 @@ void mat4::set(float m11, float m12, float m13, float m14, float m21, float m22,
 	m[15] = m44;
 }
 
-void mat4::makeIdentity()
+void Mat4::makeIdentity()
 {
 	memset(m, 0, sizeof(float)* 16);   // memory.h
 	m[0] = m[5] = m[10] = m[15] = 1.f;
 }
 
-void mat4::buildPerspectiveProjection(float fieldOfViewRadians, float aspectRatio, float zNear, float zFar)
+void Mat4::buildPerspectiveProjection(float fieldOfViewRadians, float aspectRatio, float zNear, float zFar)
 {
 	float cotangent = (float)(cos(fieldOfViewRadians/2) / sin(fieldOfViewRadians/2));
 
@@ -71,7 +72,7 @@ void mat4::buildPerspectiveProjection(float fieldOfViewRadians, float aspectRati
 	m[15] = 0;
 }
 
-void mat4::transformVec3(float& x, float& y, float& z)
+void Mat4::transformVec3(float& x, float& y, float& z)
 {
 	float vector[3];
 
@@ -84,14 +85,14 @@ void mat4::transformVec3(float& x, float& y, float& z)
 	z = vector[2];
 }
 
-void mat4::setScale(float x, float y, float z)
+void Mat4::setScale(float x, float y, float z)
 {
 	m[0] = x;
 	m[5] = y;
 	m[10] = z;
 }
 
-void mat4::multiplyWith1x4Matrix(float *matrix)
+void Mat4::multiplyWith1x4Matrix(float *matrix)
 {
 	float mat[4];
 	mat[0] = matrix[0];
@@ -105,9 +106,9 @@ void mat4::multiplyWith1x4Matrix(float *matrix)
 	matrix[3] = m[3]*mat[0] + m[7]*mat[1] + m[11]*mat[2] + m[15]*mat[3];
 }
 
-mat4 mat4::inverse()
+Mat4 Mat4::inverse()
 {
-	mat4 r;
+	Mat4 r;
 	float v0 = m[2] * m[7] - m[6] * m[3];
     float v1 = m[2] * m[11] - m[10] * m[3];
     float v2 = m[2] * m[15] - m[14] * m[3];
@@ -158,12 +159,12 @@ mat4 mat4::inverse()
 	return r;
 }
 
-void mat4::buildTranslate(const vec3& v)
+void Mat4::buildTranslate(const Vec3& v)
 {
 	buildTranslate(v.x, v.y, v.z);
 }
 
-void mat4::buildTranslate(float x, float y, float z)
+void Mat4::buildTranslate(float x, float y, float z)
 {
 	makeIdentity();
 	m[12] = x;
@@ -171,12 +172,12 @@ void mat4::buildTranslate(float x, float y, float z)
 	m[14] = z;
 }
 
-void mat4::buildScale(const vec3 & v)
+void Mat4::buildScale(const Vec3 & v)
 {
 	buildScale(v.x, v.y, v.z);
 }
 
-void mat4::buildScale(float x, float y, float z)
+void Mat4::buildScale(float x, float y, float z)
 {
 	makeIdentity();
 
@@ -185,24 +186,61 @@ void mat4::buildScale(float x, float y, float z)
 	this->m[10] = z;
 }
 
-void mat4::buildRotation(const vec3 & v)
+void Mat4::buildRotation(const Vec3 & v)
 {
 	buildRotation(v.x, v.y, v.z);
 }
 
-void mat4::buildRotation(float x, float y, float z)
+void Mat4::buildRotation(const Quat & q)
 {
-	mat4 rotX, rotY, rotZ;
-	rotX.buildRotationX(x);
-	rotY.buildRotationX(y);
-	rotZ.buildRotationX(z);
-	makeIdentity();
-	*this *= rotX;
-	*this *= rotY;
-	*this *= rotZ;
+	float x2 = q.x + q.x;
+	float y2 = q.y + q.y;
+	float z2 = q.z + q.z;
+
+	float xx2 = q.x * x2;
+	float yy2 = q.y * y2;
+	float zz2 = q.z * z2;
+	float xy2 = q.x * y2;
+	float xz2 = q.x * z2;
+	float yz2 = q.y * z2;
+	float wx2 = q.w * x2;
+	float wy2 = q.w * y2;
+	float wz2 = q.w * z2;
+
+	m[0] = 1.0f - yy2 - zz2;
+	m[1] = xy2 + wz2;
+	m[2] = xz2 - wy2;
+	m[3] = 0.0f;
+
+	m[4] = xy2 - wz2;
+	m[5] = 1.0f - xx2 - zz2;
+	m[6] = yz2 + wx2;
+	m[7] = 0.0f;
+
+	m[8] = xz2 + wy2;
+	m[9] = yz2 - wx2;
+	m[10] = 1.0f - xx2 - yy2;
+	m[11] = 0.0f;
+
+	m[12] = 0.0f;
+	m[13] = 0.0f;
+	m[14] = 0.0f;
+	m[15] = 1.0f;
 }
 
-void mat4::buildRotationX(float angle)
+void Mat4::buildRotation(float x, float y, float z)
+{
+	Mat4 rotX, rotY, rotZ;
+	rotX.buildRotationX(x);
+	rotY.buildRotationY(y);
+	rotZ.buildRotationZ(z);
+	makeIdentity();
+	*this *= rotZ;
+	*this *= rotX;
+	*this *= rotY;
+}
+
+void Mat4::buildRotationX(float angle)
 {
 	makeIdentity();
 	float c = cos(angle);
@@ -214,7 +252,7 @@ void mat4::buildRotationX(float angle)
 	this->m[10] = c;
 }
 
-void mat4::buildRotationY(float angle)
+void Mat4::buildRotationY(float angle)
 {
 	makeIdentity();
 	float c = cos(angle);
@@ -226,7 +264,7 @@ void mat4::buildRotationY(float angle)
 	this->m[10] = c;
 }
 
-void mat4::buildRotationZ(float angle)
+void Mat4::buildRotationZ(float angle)
 {
 	makeIdentity();
 	float c = cos(angle);
@@ -238,9 +276,9 @@ void mat4::buildRotationZ(float angle)
 	this->m[5] = c;
 }
 
-mat4 mat4::operator*(const mat4& mat)
+Mat4 Mat4::operator*(const Mat4& mat)
 {
-	mat4 r;
+	Mat4 r;
 	const float* m1 = mat.m;
 	r.m[0] = m[0] * m1[0] + m[4] * m1[1] + m[8] * m1[2] + m[12] * m1[3];
 	r.m[1] = m[1] * m1[0] + m[5] * m1[1] + m[9] * m1[2] + m[13] * m1[3];
@@ -262,25 +300,25 @@ mat4 mat4::operator*(const mat4& mat)
 	return r;
 }
 
-mat4& mat4::operator*=(const mat4 & mat)
+Mat4& Mat4::operator*=(const Mat4 & mat)
 {
-	mat4&& r = std::move(*this * mat);
+	Mat4&& r = std::move(*this * mat);
 	memcpy(m, r.m, MATRIX_SIZE);
 	return *this;
 }
 
-mat4 mat4::buildLookAt(vec3 position, vec3 target, vec3 up)
+Mat4 Mat4::buildLookAt(Vec3 position, Vec3 target, Vec3 up)
 {
 	// right hand  opengl
-	vec3 zaxis = position - target;
+	Vec3 zaxis = position - target;
 	// left hand
 	// vec3 zaxis = target - position;
 	zaxis.normalize();
 
-	vec3 xaxis = up.cross(zaxis);
+	Vec3 xaxis = up.cross(zaxis);
 	xaxis.normalize();
 
-	vec3 yaxis = zaxis.cross(xaxis);
+	Vec3 yaxis = zaxis.cross(xaxis);
 
 	m[0] = xaxis.x;
 	m[1] = yaxis.x;

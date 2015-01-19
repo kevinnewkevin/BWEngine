@@ -7,13 +7,14 @@
 			varying vec2 v_texCoord;
 			void main() 
 			{
-				gl_Position = MVPMatrix * a_position;
+				gl_Position = BW_MVPMatrix * a_position;
 				v_texCoord = a_texCoord;
 			}
 		]]
 
 		frag = [[
 			precision mediump float;
+			uniform sampler2D	Texture0;
 			varying vec2 v_texCoord;
 			void main() 
 			{

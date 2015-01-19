@@ -12,19 +12,19 @@ const char* GLProgram::ATTRIBUTE::NAME_TEX_COORD2	= "a_texCoord2";
 const char* GLProgram::ATTRIBUTE::NAME_TEX_COORD3	= "a_texCoord3";
 const char* GLProgram::ATTRIBUTE::NAME_NORMAL		= "a_normal";
 
-const char* GLProgram::UNIFORM::NAME_AMBIENT_COLOR	= "AmbientColor";
-const char* GLProgram::UNIFORM::NAME_P_MATRIX		= "PMatrix";
-const char* GLProgram::UNIFORM::NAME_MV_MATRIX		= "MVMatrix";
-const char* GLProgram::UNIFORM::NAME_MVP_MATRIX		= "MVPMatrix";
-const char* GLProgram::UNIFORM::NAME_NORMAL_MATRIX	= "NormalMatrix";
-const char* GLProgram::UNIFORM::NAME_TIME			= "Time";
-const char* GLProgram::UNIFORM::NAME_SIN_TIME		= "SinTime";
-const char* GLProgram::UNIFORM::NAME_COS_TIME		= "CosTime";
-const char* GLProgram::UNIFORM::NAME_RANDOM01		= "Random01";
-const char* GLProgram::UNIFORM::NAME_SAMPLER0		= "Texture0";
-const char* GLProgram::UNIFORM::NAME_SAMPLER1		= "Texture1";
-const char* GLProgram::UNIFORM::NAME_SAMPLER2		= "Texture2";
-const char* GLProgram::UNIFORM::NAME_SAMPLER3		= "Texture3";
+const char* GLProgram::UNIFORM::NAME_AMBIENT_COLOR	= "BW_AmbientColor";
+const char* GLProgram::UNIFORM::NAME_P_MATRIX		= "BW_PMatrix";
+const char* GLProgram::UNIFORM::NAME_MV_MATRIX		= "BW_MVMatrix";
+const char* GLProgram::UNIFORM::NAME_MVP_MATRIX		= "BW_MVPMatrix";
+const char* GLProgram::UNIFORM::NAME_NORMAL_MATRIX	= "BW_NormalMatrix";
+const char* GLProgram::UNIFORM::NAME_TIME			= "BW_Time";
+const char* GLProgram::UNIFORM::NAME_SIN_TIME		= "BW_SinTime";
+const char* GLProgram::UNIFORM::NAME_COS_TIME		= "BW_CosTime";
+const char* GLProgram::UNIFORM::NAME_RANDOM01		= "BW_Random01";
+const char* GLProgram::UNIFORM::NAME_SAMPLER0		= "BW_Texture0";
+const char* GLProgram::UNIFORM::NAME_SAMPLER1		= "BW_Texture1";
+const char* GLProgram::UNIFORM::NAME_SAMPLER2		= "BW_Texture2";
+const char* GLProgram::UNIFORM::NAME_SAMPLER3		= "BW_Texture3";
 
 struct ShaderPass {
 	string vert;
@@ -41,19 +41,19 @@ GLuint GLProgram::loadShaderWithType(GLenum shaderType, const char* source)
 	if (shader)
 	{
 		const GLchar *sources[] = {
-			"uniform mat4		PMatrix;\n"
-			"uniform mat4		MVMatrix;\n"
-			"uniform mat4		MVPMatrix;\n"
-			"uniform mat3		NormalMatrix;\n"
-			"uniform vec4		Time;\n"
-			"uniform vec4		SinTime;\n"
-			"uniform vec4		CosTime;\n"
-			"uniform vec4		Random01;\n"
-			"uniform sampler2D	Texture0;\n"
-			"uniform sampler2D	Texture1;\n"
-			"uniform sampler2D	Texture2;\n"
-			"uniform sampler2D	Texture3;\n"
-			"//CC INCLUDES END\n\n",
+			"uniform mat4		BW_PMatrix;\n"
+			"uniform mat4		BW_MVMatrix;\n"
+			"uniform mat4		BW_MVPMatrix;\n"
+			"uniform mat3		BW_NormalMatrix;\n"
+			"uniform vec4		BW_Time;\n"
+			"uniform vec4		BW_SinTime;\n"
+			"uniform vec4		BW_CosTime;\n"
+			"uniform vec4		BW_Random01;\n"
+			"uniform sampler2D	BW_Texture0;\n"
+			"uniform sampler2D	BW_Texture1;\n"
+			"uniform sampler2D	BW_Texture2;\n"
+			"uniform sampler2D	BW_Texture3;\n"
+			"//BW INCLUDES END\n\n",
 			source,
 		};
 		glShaderSource(shader, sizeof(sources) / sizeof(*sources), sources, nullptr);
@@ -360,8 +360,7 @@ void GLProgram::parseUniforms()
 				uniformName[length] = '\0';
 
 				// Only add uniforms that are not built-in.
-				// The ones that start with 'CC_' are built-ins
-				if (strncmp("CC_", uniformName, 3) != 0) {
+				if (strncmp("BW_", uniformName, 3) != 0) {
 					// remove possible array '[]' from uniform name
 					if (length > 3)
 					{

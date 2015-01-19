@@ -15,6 +15,7 @@
     <ClCompile Include="..\base\BaseClass.cpp" />
     <ClCompile Include="..\base\component\BaseComponent.cpp" />
     <ClCompile Include="..\base\component\Camera.cpp" />
+    <ClCompile Include="..\base\component\MeshRenderer.cpp" />
     <ClCompile Include="..\base\component\SpriteRenderer.cpp" />
     <ClCompile Include="..\base\component\Transform.cpp" />
     <ClCompile Include="..\base\Data.cpp" />
@@ -97,20 +98,25 @@
     <ClCompile Include="..\math\mat4.cpp" />
     <ClCompile Include="..\math\quat.cpp" />
     <ClCompile Include="..\math\vec2.cpp" />
+    <ClCompile Include="..\math\vec4.cpp" />
     <ClCompile Include="..\renderer\GLProgram.cpp" />
     <ClCompile Include="..\renderer\GLProgramCache.cpp" />
     <ClCompile Include="..\renderer\Image.cpp" />
     <ClCompile Include="..\renderer\ImageLoader.cpp" />
+    <ClCompile Include="..\renderer\Material.cpp" />
+    <ClCompile Include="..\renderer\Mesh.cpp" />
     <ClCompile Include="..\renderer\Texture.cpp" />
     <ClCompile Include="..\renderer\win32\GLView.cpp" />
     <ClCompile Include="..\utils\AutoReleasePool.cpp" />
     <ClCompile Include="..\utils\FileUtils.cpp" />
+    <ClCompile Include="..\utils\MeshLoaderB3D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\base\Application.h" />
     <ClInclude Include="..\base\BaseClass.h" />
     <ClInclude Include="..\base\component\BaseComponent.h" />
     <ClInclude Include="..\base\component\Camera.h" />
+    <ClInclude Include="..\base\component\MeshRenderer.h" />
     <ClInclude Include="..\base\component\SpriteRenderer.h" />
     <ClInclude Include="..\base\component\Transform.h" />
     <ClInclude Include="..\base\Data.h" />
@@ -156,14 +162,19 @@
     <ClInclude Include="..\math\quat.h" />
     <ClInclude Include="..\math\vec2.h" />
     <ClInclude Include="..\math\vec3.h" />
+    <ClInclude Include="..\math\vec4.h" />
     <ClInclude Include="..\renderer\GLProgram.h" />
     <ClInclude Include="..\renderer\GLProgramCache.h" />
     <ClInclude Include="..\renderer\Image.h" />
     <ClInclude Include="..\renderer\ImageLoader.h" />
+    <ClInclude Include="..\renderer\Material.h" />
+    <ClInclude Include="..\renderer\Mesh.h" />
     <ClInclude Include="..\renderer\Texture.h" />
     <ClInclude Include="..\renderer\win32\GLView.h" />
     <ClInclude Include="..\utils\AutoReleasePool.h" />
     <ClInclude Include="..\utils\FileUtils.h" />
+    <ClInclude Include="..\utils\GLUtils.h" />
+    <ClInclude Include="..\utils\MeshLoaderB3D.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0B945932-80CC-49C4-B1D4-75841715D8CC}</ProjectGuid>
@@ -173,7 +184,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>

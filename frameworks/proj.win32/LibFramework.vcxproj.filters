@@ -330,6 +330,21 @@
     <ClCompile Include="..\renderer\GLProgramCache.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
+    <ClCompile Include="..\math\vec4.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\component\MeshRenderer.cpp">
+      <Filter>base\component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\renderer\Mesh.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\utils\MeshLoaderB3D.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\renderer\Material.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\extern\libjpeg\jconfig.h">
@@ -502,6 +517,24 @@
     </ClInclude>
     <ClInclude Include="..\renderer\GLProgramCache.h">
       <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\renderer\Material.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\math\vec4.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\component\MeshRenderer.h">
+      <Filter>base\component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\renderer\Mesh.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utils\MeshLoaderB3D.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utils\GLUtils.h">
+      <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

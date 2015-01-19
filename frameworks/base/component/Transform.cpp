@@ -3,7 +3,7 @@
 
 
 Transform::Transform(GameObject* owner/* = nullptr*/)
-: BaseComponent(owner), _scale(vec3(1.0, 1.0, 1.0))
+: BaseComponent(owner), _scale(Vec3(1.0, 1.0, 1.0))
 {
 }
 
@@ -36,7 +36,13 @@ void Transform::setScale(const Vec3 & scale)
 	_transformDirty = true;
 }
 
-void Transform::setRotation(const Vec3 & rot)
+void Transform::setScale(float scale)
+{
+	_scale.set(scale, scale, scale);
+	_transformDirty = true;
+}
+
+void Transform::setRotation(const Quat& rot)
 {
 	_rotation = rot;
 	_transformDirty = true;
@@ -54,7 +60,7 @@ void Transform::setLocalScale(const Vec3 & scale)
 	_transformLocalDirty = true;
 }
 
-void Transform::setLocalRotation(const Vec3 & rot)
+void Transform::setLocalRotation(const Quat & rot)
 {
 	_localRotation = rot;
 	_transformLocalDirty = true;
@@ -90,9 +96,9 @@ const Mat4& Transform::apply()
 		transMat.buildTranslate(_position);
 		rotMat.buildRotation(_rotation);
 
-		_modleMatrix.set(scaleMat);
+		_modleMatrix.set(transMat);
 		_modleMatrix *= rotMat;
-		_modleMatrix *= transMat;
+		_modleMatrix *= scaleMat;
 
 		_transformDirty = false;
 	}

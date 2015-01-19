@@ -35,7 +35,15 @@ Texture* ResourceManager::addTexture(const char* file)
     }
 
 	Image image;
-	loadImagePNG(fullPath.c_str(), image);
+
+	std::string basename(file);
+    std::transform(basename.begin(), basename.end(), basename.begin(), ::tolower);
+    
+	if (basename.find(".png") != std::string::npos)
+		loadImagePNG(fullPath.c_str(), image);
+	else if (basename.find(".jpg") != std::string::npos)
+		loadImageJPG(fullPath.c_str(), image);
+
 	texture = new Texture();
 	texture->initWithImage(&image);
 

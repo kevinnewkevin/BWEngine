@@ -7,6 +7,9 @@ class GameObject : public Ref//, public BaseMSGClass
 {
 	friend class Transform;
 public:
+	std::function<void(float)> updateCallback = nullptr;
+
+public:
 	GameObject(const char* name = nullptr);
 	virtual ~GameObject();
 
@@ -25,6 +28,9 @@ public:
 	void setParent(GameObject* parent);
 	GameObject* getParent();
 	void addChild(GameObject* child);
+
+public:
+	Mat4 mvpMatrix;
 
 protected:
 	Transform* _transform = nullptr;

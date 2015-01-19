@@ -481,9 +481,22 @@ long FileUtils::getFileSize(const std::string & filepath)
 			return 0;
 	}
 
+	std::ifstream in(fullpath.c_str());
+	if (in.fail())
+	{
+		in.close();
+		return -1;
+	}
+
+	in.seekg(0, std::ios::end);      //设置文件指针到文件流的尾部
+	std::streampos ps = in.tellg();  //读取文件指针的位置
+	in.close();                 //关闭文件流
+	return ps.seekpos();
+
+	/*
 	struct stat info;
 	// Get data associated with "crt_stat.c":
-	int result = stat(fullpath.c_str(), &info);
+	int result = _stat64i32(fullpath.c_str(), &info);
 
 	// Check if statistics are valid:
 	if (result != 0)
@@ -495,6 +508,7 @@ long FileUtils::getFileSize(const std::string & filepath)
 	{
 		return (long)(info.st_size);
 	}
+	*/
 }
 
 bool FileUtils::init()

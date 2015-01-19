@@ -1,11 +1,11 @@
 #include "quat.h"
 
-quat::quat(float ww, float xx, float yy, float zz) :w(ww), x(xx), y(yy), z(zz)
+Quat::Quat(float ww, float xx, float yy, float zz) :w(ww), x(xx), y(yy), z(zz)
 {
 
 }
 
-void quat::fromAxisAngle(const vec3& axis, float angle)
+void Quat::fromAxisAngle(const Vec3& axis, float angle)
 {
 	float rad = angle*0.5f;
 	float scale = sinf(rad);
@@ -16,9 +16,9 @@ void quat::fromAxisAngle(const vec3& axis, float angle)
 	z = axis.z * scale;
 }
 
-mat4 quat::toMatrix() const
+Mat4 Quat::toMatrix() const
 {
-	mat4 m;
+	Mat4 m;
 	float wx, wy, wz, xx, xy, xz, yy, yz, zz;
 
 	// calculate coefficients
@@ -57,12 +57,12 @@ mat4 quat::toMatrix() const
 	return m;
 }
 
-float quat::dot(const quat& rkQ) const
+float Quat::dot(const Quat& rkQ) const
 {
     return w*rkQ.w+x*rkQ.x+y*rkQ.y+z*rkQ.z;
 }
 
-quat& quat::slerp(quat q1, quat q2, float time, float threshold)
+Quat& Quat::slerp(Quat q1, Quat q2, float time, float threshold)
 {
 	float angle = q1.dot(q2);
 
@@ -85,7 +85,7 @@ quat& quat::slerp(quat q1, quat q2, float time, float threshold)
 		return lerp(q1,q2,time);
 }
 
-quat& quat::lerp(quat q1, quat q2, float time)
+Quat& Quat::lerp(Quat q1, Quat q2, float time)
 {
 	const float scale = 1.0f - time;
 	return (*this = (q1*scale) + (q2*time));

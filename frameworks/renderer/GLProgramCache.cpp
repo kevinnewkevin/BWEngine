@@ -35,7 +35,7 @@ GLProgramCache::~GLProgramCache()
 }
 
 bool GLProgramCache::init()
-{    
+{
     loadDefaultGLPrograms();
     return true;
 }
@@ -54,17 +54,20 @@ void GLProgramCache::reloadDefaultGLPrograms()
 
 void GLProgramCache::loadDefaultGLProgram(GLProgram *p, int type)
 {
+	bool bRet = false;
 	switch (type) {
         case TYPE::POSITION_TEXTURE:
-            p->initWithFile("shaders/default.shader");
+			bRet = p->initWithFile("shaders/default.shader");
             break;
         default:
             LOG("cocos2d: %s:%d, error shader type", __FUNCTION__, __LINE__);
             return;
     }
-    
-    p->link();
-    p->updateUniforms();
+	if (bRet)
+	{
+		p->link();
+		p->updateUniforms();
+	}
     CheckGLError();
 }
 

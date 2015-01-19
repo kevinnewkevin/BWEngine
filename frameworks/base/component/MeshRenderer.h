@@ -1,16 +1,21 @@
 #pragma once
 #include "base/component/BaseComponent.h"
 #include "renderer/Material.h"
+#include <string>
+
+using std::string;
 
 class GameObject;
 class Texture;
+class Mesh;
 
-class SpriteRenderer : public BaseComponent
+class MeshRenderer : public BaseComponent
 {
 public:
-	SpriteRenderer(GameObject* gameObject = nullptr);
-	virtual ~SpriteRenderer();
+	MeshRenderer(GameObject* gameObject = nullptr);
+	virtual ~MeshRenderer();
 
+	void setFile(const char* file);
 	virtual void Awake();
 	virtual void Start();
 	virtual void OnEnable();
@@ -19,18 +24,12 @@ public:
 	virtual void Update(float dt);
 
 	virtual void OnGUI();
-
-	void updateTexture();
-
 public:
+
 	Material* material = nullptr;
-	Texture* texture = nullptr;
-
+	string _filePath;
+	Mesh*  _mesh;
+	Texture* _texture;
 protected:
-	std::vector<Vec3> vertices;
-	std::vector<Vec2> texCoords;
-	std::vector<unsigned short> indices;
-
-	bool _isDirty = false;
 };
 

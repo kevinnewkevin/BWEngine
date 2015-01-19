@@ -8,8 +8,12 @@ using std::vector;
 class Transform;
 class GameObject;
 
-class Camera:public BaseComponent
+class Camera : public BaseComponent
 {
+public:
+	static Camera* main;
+
+	Mat4 projectMat;
 public:
 	Camera();
 	~Camera();

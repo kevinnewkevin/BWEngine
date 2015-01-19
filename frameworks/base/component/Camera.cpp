@@ -7,9 +7,11 @@
 #include "gl/glew.h"
 using std::vector;
 
+Camera* Camera::main = nullptr;
+
 Camera::Camera()
 {
-
+	if (main == nullptr) main = this;
 }
 
 Camera::~Camera()
@@ -19,7 +21,7 @@ Camera::~Camera()
 
 void Camera::Start()
 {
-	gameObject->getTransform()->setPosition(Vec3(0, 200, 0));
+	gameObject->getTransform()->setPosition(Vec3(0, 0, 0));
 	_LookAtMatrix.buildLookAt(Vec3(0, 0, 700), Vec3(0, 0, 0), Vec3(0, 1, 0));
 
 	_PerspectiveMatrix.buildPerspectiveProjection((float)QUAT_PI / 3, 800 / 600, 1, 1000);
@@ -47,23 +49,16 @@ void Camera::traverse(Transform* t)
 void Camera::OnGUI()
 {
 	CheckGLError();
-	Mat4 VP;
 	Mat4 cameraTrans = gameObject->getTransform()->apply();
 	cameraTrans.m[12] *= -1;
 	cameraTrans.m[13] *= -1;
 	cameraTrans.m[14] *= -1;
-	VP = _PerspectiveMatrix * _LookAtMatrix * cameraTrans;
+	projectMat = _PerspectiveMatrix * _LookAtMatrix * cameraTrans;
 
-	auto program = GLProgramCache::getInstance()->getGLProgram(GLProgramCache::NAME::POSITION_TEXTURE);
-	program->use();
 	for (unsigned int i = 0; i < _RenderObject.size(); ++i)
 	{
 		GameObject* obj = _RenderObject[i];
-		Mat4 M = obj->getTransform()->apply();
-		Mat4 mvp = VP*M;
-
-		program->setUniformsForBuiltins(mvp);
-		CheckGLError();
+		obj->mvpMatrix = projectMat * obj->getTransform()->apply();
 
 		auto& components = obj->getComponents();
 		for (auto comp : components)
