@@ -43,6 +43,8 @@ Texture* ResourceManager::addTexture(const char* file)
 		loadImagePNG(fullPath.c_str(), image);
 	else if (basename.find(".jpg") != std::string::npos)
 		loadImageJPG(fullPath.c_str(), image);
+	else if (basename.find(".tga") != std::string::npos)
+		loadImageTGA(fullPath.c_str(), image);
 
 	texture = new Texture();
 	texture->initWithImage(&image);

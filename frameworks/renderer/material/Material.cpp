@@ -1,4 +1,4 @@
-#include "renderer/Material.h"
+#include "renderer/material/Material.h"
 #include "renderer/GLProgram.h"
 #include "utils/GLUtils.h"
 #include "renderer/Texture.h"
@@ -352,7 +352,7 @@ void Material::setVertexAttribCallback(const std::string &name, const std::funct
 	}
 	else
 	{
-		LOG("cocos2d: warning: Attribute not found: %s", name.c_str());
+		LOG("warning: Attribute not found: %s", name.c_str());
 	}
 }
 
@@ -365,7 +365,7 @@ void Material::setVertexAttribPointer(const std::string &name, GLint size, GLenu
 	}
 	else
 	{
-		LOG("cocos2d: warning: Attribute not found: %s", name.c_str());
+		LOG("warning: Attribute not found: %s", name.c_str());
 	}
 }
 
@@ -377,7 +377,7 @@ void Material::setUniformCallback(const std::string &uniformName, const std::fun
 	if (v)
 		v->setCallback(callback);
 	else
-		LOG("cocos2d: warning: Uniform not found: %s", uniformName.c_str());
+		LOG("warning: Uniform not found: %s", uniformName.c_str());
 }
 
 void Material::setUniformCallback(GLint uniformLocation, const std::function<void(GLProgram*, Uniform*)> &callback)
@@ -386,7 +386,7 @@ void Material::setUniformCallback(GLint uniformLocation, const std::function<voi
 	if (v)
 		v->setCallback(callback);
 	else
-		LOG("cocos2d: warning: Uniform at location not found: %i", uniformLocation);
+		LOG("warning: Uniform at location not found: %i", uniformLocation);
 }
 
 void Material::setUniformFloat(const std::string &uniformName, float value)
@@ -395,7 +395,7 @@ void Material::setUniformFloat(const std::string &uniformName, float value)
 	if (v)
 		v->setFloat(value);
 	else
-		LOG("cocos2d: warning: Uniform not found: %s", uniformName.c_str());
+		LOG("warning: Uniform not found: %s", uniformName.c_str());
 }
 
 void Material::setUniformFloat(GLint uniformLocation, float value)
@@ -404,7 +404,7 @@ void Material::setUniformFloat(GLint uniformLocation, float value)
 	if (v)
 		v->setFloat(value);
 	else
-		LOG("cocos2d: warning: Uniform at location not found: %i", uniformLocation);
+		LOG("warning: Uniform at location not found: %i", uniformLocation);
 }
 
 void Material::setUniformInt(const std::string &uniformName, int value)
@@ -413,7 +413,7 @@ void Material::setUniformInt(const std::string &uniformName, int value)
 	if (v)
 		v->setInt(value);
 	else
-		LOG("cocos2d: warning: Uniform not found: %s", uniformName.c_str());
+		LOG("warning: Uniform not found: %s", uniformName.c_str());
 }
 
 void Material::setUniformInt(GLint uniformLocation, int value)
@@ -422,7 +422,7 @@ void Material::setUniformInt(GLint uniformLocation, int value)
 	if (v)
 		v->setInt(value);
 	else
-		LOG("cocos2d: warning: Uniform at location not found: %i", uniformLocation);
+		LOG("warning: Uniform at location not found: %i", uniformLocation);
 
 }
 
@@ -432,7 +432,7 @@ void Material::setUniformVec2(const std::string &uniformName, const Vec2& value)
 	if (v)
 		v->setVec2(value);
 	else
-		LOG("cocos2d: warning: Uniform not found: %s", uniformName.c_str());
+		LOG("warning: Uniform not found: %s", uniformName.c_str());
 }
 
 void Material::setUniformVec2(GLint uniformLocation, const Vec2& value)
@@ -441,7 +441,7 @@ void Material::setUniformVec2(GLint uniformLocation, const Vec2& value)
 	if (v)
 		v->setVec2(value);
 	else
-		LOG("cocos2d: warning: Uniform at location not found: %i", uniformLocation);
+		LOG("warning: Uniform at location not found: %i", uniformLocation);
 }
 
 void Material::setUniformVec3(const std::string &uniformName, const Vec3& value)
@@ -450,7 +450,7 @@ void Material::setUniformVec3(const std::string &uniformName, const Vec3& value)
 	if (v)
 		v->setVec3(value);
 	else
-		LOG("cocos2d: warning: Uniform not found: %s", uniformName.c_str());
+		LOG("warning: Uniform not found: %s", uniformName.c_str());
 }
 
 void Material::setUniformVec3(GLint uniformLocation, const Vec3& value)
@@ -459,7 +459,7 @@ void Material::setUniformVec3(GLint uniformLocation, const Vec3& value)
 	if (v)
 		v->setVec3(value);
 	else
-		LOG("cocos2d: warning: Uniform at location not found: %i", uniformLocation);
+		LOG("warning: Uniform at location not found: %i", uniformLocation);
 }
 
 void Material::setUniformVec4(const std::string &uniformName, const Vec4& value)
@@ -468,7 +468,7 @@ void Material::setUniformVec4(const std::string &uniformName, const Vec4& value)
 	if (v)
 		v->setVec4(value);
 	else
-		LOG("cocos2d: warning: Uniform not found: %s", uniformName.c_str());
+		LOG("warning: Uniform not found: %s", uniformName.c_str());
 }
 
 void Material::setUniformVec4(GLint uniformLocation, const Vec4& value)
@@ -477,7 +477,7 @@ void Material::setUniformVec4(GLint uniformLocation, const Vec4& value)
 	if (v)
 		v->setVec4(value);
 	else
-		LOG("cocos2d: warning: Uniform at location not found: %i", uniformLocation);
+		LOG("warning: Uniform at location not found: %i", uniformLocation);
 }
 
 void Material::setUniformMat4(const std::string &uniformName, const Mat4& value)
@@ -486,7 +486,7 @@ void Material::setUniformMat4(const std::string &uniformName, const Mat4& value)
 	if (v)
 		v->setMat4(value);
 	else
-		LOG("cocos2d: warning: Uniform not found: %s", uniformName.c_str());
+		LOG("warning: Uniform not found: %s", uniformName.c_str());
 }
 
 void Material::setUniformMat4(GLint uniformLocation, const Mat4& value)
@@ -495,7 +495,7 @@ void Material::setUniformMat4(GLint uniformLocation, const Mat4& value)
 	if (v)
 		v->setMat4(value);
 	else
-		LOG("cocos2d: warning: Uniform at location not found: %i", uniformLocation);
+		LOG("warning: Uniform at location not found: %i", uniformLocation);
 }
 
 // Textures
@@ -529,7 +529,7 @@ void Material::setUniformTexture(const std::string &uniformName, GLuint textureI
 	}
 	else
 	{
-		LOG("cocos2d: warning: Uniform not found: %s", uniformName.c_str());
+		LOG("warning: Uniform not found: %s", uniformName.c_str());
 	}
 }
 
@@ -550,6 +550,6 @@ void Material::setUniformTexture(GLint uniformLocation, GLuint textureId)
 	}
 	else
 	{
-		LOG("cocos2d: warning: Uniform at location not found: %i", uniformLocation);
+		LOG("warning: Uniform at location not found: %i", uniformLocation);
 	}
 }

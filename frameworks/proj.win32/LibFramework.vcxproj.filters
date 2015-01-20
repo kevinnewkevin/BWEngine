@@ -46,6 +46,15 @@
     <Filter Include="base\component">
       <UniqueIdentifier>{2bfcb14c-6aed-4957-bbc2-45a0f51a20b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="renderer\command">
+      <UniqueIdentifier>{487e191c-f767-4e79-a173-86a21137360b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="renderer\material">
+      <UniqueIdentifier>{b281cdbc-a1f1-49c6-9281-b35a88a74bf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extern\texture\libtga">
+      <UniqueIdentifier>{48818468-d8f3-4aca-a5fb-25b21aff98a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\extern\libjpeg\jcarith.c">
@@ -342,8 +351,32 @@
     <ClCompile Include="..\utils\MeshLoaderB3D.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\renderer\Material.cpp">
+    <ClCompile Include="..\renderer\Joint.cpp">
       <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\renderer\SkinnedMesh.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\utils\Timer.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\renderer\command\RenderCommand.cpp">
+      <Filter>renderer\command</Filter>
+    </ClCompile>
+    <ClCompile Include="..\renderer\material\Material.cpp">
+      <Filter>renderer\material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\renderer\material\MeshMaterial.cpp">
+      <Filter>renderer\material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\renderer\command\MeshCommand.cpp">
+      <Filter>renderer\command</Filter>
+    </ClCompile>
+    <ClCompile Include="..\renderer\Renderer.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\libtga\TGAlib.cpp">
+      <Filter>extern\texture\libtga</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -518,9 +551,6 @@
     <ClInclude Include="..\renderer\GLProgramCache.h">
       <Filter>renderer</Filter>
     </ClInclude>
-    <ClInclude Include="..\renderer\Material.h">
-      <Filter>renderer</Filter>
-    </ClInclude>
     <ClInclude Include="..\math\vec4.h">
       <Filter>math</Filter>
     </ClInclude>
@@ -535,6 +565,36 @@
     </ClInclude>
     <ClInclude Include="..\utils\GLUtils.h">
       <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\renderer\Joint.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\renderer\SkinnedMesh.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utils\Timer.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utils\MathUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\renderer\command\RenderCommand.h">
+      <Filter>renderer\command</Filter>
+    </ClInclude>
+    <ClInclude Include="..\renderer\material\Material.h">
+      <Filter>renderer\material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\renderer\material\MeshMaterial.h">
+      <Filter>renderer\material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\renderer\command\MeshCommand.h">
+      <Filter>renderer\command</Filter>
+    </ClInclude>
+    <ClInclude Include="..\renderer\Renderer.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\libtga\TGAlib.h">
+      <Filter>extern\texture\libtga</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

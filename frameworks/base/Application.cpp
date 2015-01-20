@@ -6,6 +6,8 @@
 #include "base/component/Camera.h"
 #include "base/component/SpriteRenderer.h"
 #include "base/component/MeshRenderer.h"
+#include "renderer/SkinnedMesh.h"
+#include "utils/Timer.h"
 
 Application* Application::sm_pSharedApplication = nullptr;
 
@@ -36,6 +38,9 @@ Application::Application()
 	_RootGameObject->addChild(obj);
 	MeshRenderer* meshRender= new MeshRenderer();
 	meshRender->setFile("ninja.b3d");
+	meshRender->getSkin()->addAnimation("walk", 0, 14);
+	meshRender->getSkin()->play("walk");
+	meshRender->getSkin()->setSpeed(10);
 	obj->addComponent(meshRender);
 	obj->getTransform()->setPosition(Vec3(-220, -220, 0));
 	obj->getTransform()->setScale(20);
@@ -43,7 +48,7 @@ Application::Application()
 		auto trans = obj->getTransform();
 		Quat& curRot = trans->getRotation();
 		Quat rot;
-		rot.fromAxisAngle(Vec3(0, 1.0, 0), QUAT_PI/60);
+		rot.fromAxisAngle(Vec3(0, 1.0, 0), QUAT_PI/360);
 		curRot = rot * curRot;
 		trans->setRotation(curRot);
 	};
@@ -66,6 +71,8 @@ void Application::glThread()
     LARGE_INTEGER nLast;
     LARGE_INTEGER nNow;
 
+	float lastTime = Timer::clock(), nowTime = 0, deltaTime;
+
     QueryPerformanceFrequency(&nFreq);
     QueryPerformanceCounter(&nLast);
 	GLView openglView;
@@ -80,10 +87,13 @@ void Application::glThread()
         if (nNow.QuadPart - nLast.QuadPart > _animationInterval.QuadPart)
         {
             nLast.QuadPart = nNow.QuadPart - (nNow.QuadPart % _animationInterval.QuadPart);
-            
+			nowTime = Timer::clock();
+			deltaTime = nowTime - lastTime;
+			lastTime = nowTime;
+
 			openglView.processEvents();
 
-			_RootGameObject->Update(nNow.QuadPart - nLast.QuadPart);
+			_RootGameObject->Update(deltaTime);
 
 			glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 				glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);

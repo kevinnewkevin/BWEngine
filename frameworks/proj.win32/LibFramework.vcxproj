@@ -84,6 +84,7 @@
     <ClCompile Include="..\extern\libpng\pngwrite.c" />
     <ClCompile Include="..\extern\libpng\pngwtran.c" />
     <ClCompile Include="..\extern\libpng\pngwutil.c" />
+    <ClCompile Include="..\extern\libtga\TGAlib.cpp" />
     <ClCompile Include="..\extern\libzlip\adler32.c" />
     <ClCompile Include="..\extern\libzlip\compress.c" />
     <ClCompile Include="..\extern\libzlip\crc32.c" />
@@ -99,17 +100,24 @@
     <ClCompile Include="..\math\quat.cpp" />
     <ClCompile Include="..\math\vec2.cpp" />
     <ClCompile Include="..\math\vec4.cpp" />
+    <ClCompile Include="..\renderer\command\RenderCommand.cpp" />
+    <ClCompile Include="..\renderer\command\MeshCommand.cpp" />
     <ClCompile Include="..\renderer\GLProgram.cpp" />
     <ClCompile Include="..\renderer\GLProgramCache.cpp" />
     <ClCompile Include="..\renderer\Image.cpp" />
     <ClCompile Include="..\renderer\ImageLoader.cpp" />
-    <ClCompile Include="..\renderer\Material.cpp" />
+    <ClCompile Include="..\renderer\Joint.cpp" />
+    <ClCompile Include="..\renderer\material\Material.cpp" />
+    <ClCompile Include="..\renderer\material\MeshMaterial.cpp" />
     <ClCompile Include="..\renderer\Mesh.cpp" />
+    <ClCompile Include="..\renderer\Renderer.cpp" />
+    <ClCompile Include="..\renderer\SkinnedMesh.cpp" />
     <ClCompile Include="..\renderer\Texture.cpp" />
     <ClCompile Include="..\renderer\win32\GLView.cpp" />
     <ClCompile Include="..\utils\AutoReleasePool.cpp" />
     <ClCompile Include="..\utils\FileUtils.cpp" />
     <ClCompile Include="..\utils\MeshLoaderB3D.cpp" />
+    <ClCompile Include="..\utils\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\base\Application.h" />
@@ -148,6 +156,7 @@
     <ClInclude Include="..\extern\libpng\pnglibconf.h" />
     <ClInclude Include="..\extern\libpng\pngpriv.h" />
     <ClInclude Include="..\extern\libpng\pngstruct.h" />
+    <ClInclude Include="..\extern\libtga\TGAlib.h" />
     <ClInclude Include="..\extern\libzlip\crc32.h" />
     <ClInclude Include="..\extern\libzlip\deflate.h" />
     <ClInclude Include="..\extern\libzlip\inffast.h" />
@@ -163,18 +172,26 @@
     <ClInclude Include="..\math\vec2.h" />
     <ClInclude Include="..\math\vec3.h" />
     <ClInclude Include="..\math\vec4.h" />
+    <ClInclude Include="..\renderer\command\RenderCommand.h" />
+    <ClInclude Include="..\renderer\command\MeshCommand.h" />
     <ClInclude Include="..\renderer\GLProgram.h" />
     <ClInclude Include="..\renderer\GLProgramCache.h" />
     <ClInclude Include="..\renderer\Image.h" />
     <ClInclude Include="..\renderer\ImageLoader.h" />
-    <ClInclude Include="..\renderer\Material.h" />
+    <ClInclude Include="..\renderer\Joint.h" />
+    <ClInclude Include="..\renderer\material\Material.h" />
+    <ClInclude Include="..\renderer\material\MeshMaterial.h" />
     <ClInclude Include="..\renderer\Mesh.h" />
+    <ClInclude Include="..\renderer\Renderer.h" />
+    <ClInclude Include="..\renderer\SkinnedMesh.h" />
     <ClInclude Include="..\renderer\Texture.h" />
     <ClInclude Include="..\renderer\win32\GLView.h" />
     <ClInclude Include="..\utils\AutoReleasePool.h" />
     <ClInclude Include="..\utils\FileUtils.h" />
     <ClInclude Include="..\utils\GLUtils.h" />
+    <ClInclude Include="..\utils\MathUtils.h" />
     <ClInclude Include="..\utils\MeshLoaderB3D.h" />
+    <ClInclude Include="..\utils\Timer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0B945932-80CC-49C4-B1D4-75841715D8CC}</ProjectGuid>

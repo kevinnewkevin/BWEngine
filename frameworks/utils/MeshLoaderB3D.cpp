@@ -3,12 +3,13 @@
 #include <iostream>
 #include <stdarg.h> 
 #include "renderer/Mesh.h"
+#include "renderer/Joint.h"
 using namespace std;
 
 #define DEBUG_B3D
 
 
-MeshLoaderB3D::MeshLoaderB3D() :_meshCount(0)
+MeshLoaderB3D::MeshLoaderB3D() :_meshCount(0), m_RootJoint(nullptr), m_TotalFrame(0)
 {
 }
 
@@ -210,18 +211,18 @@ void MeshLoaderB3D::readTEXS(FILE* fp)
 
 void MeshLoaderB3D::readNODE(FILE* fp)
 {
-	//if (m_ReadJoint == NULL)
-	//{
-	//	m_RootJoint = new Joint;
-	//	m_ReadJoint = m_RootJoint;
-	//}
-	//else
-	//{
-	//	Joint* newJoint = new Joint;
-	//	m_ReadJoint->children.push_back(newJoint);
-	//	newJoint->parent = m_ReadJoint;
-	//	m_ReadJoint = newJoint;
-	//}
+	if (m_ReadJoint == NULL)
+	{
+		m_RootJoint = new Joint;
+		m_ReadJoint = m_RootJoint;
+	}
+	else
+	{
+		Joint* newJoint = new Joint;
+		m_ReadJoint->children.push_back(newJoint);
+		newJoint->parent = m_ReadJoint;
+		m_ReadJoint = newJoint;
+	}
 
 	string str = readString(fp);
 	printTree(str.c_str());
@@ -230,10 +231,10 @@ void MeshLoaderB3D::readNODE(FILE* fp)
 	Vec3 s=readVec3(fp);
 	Quat r=readQuat(fp);
 
-	//m_ReadJoint->name = str;
-	//m_ReadJoint->position = t;
-	//m_ReadJoint->scale = s;
-	//m_ReadJoint->rotation = r;
+	m_ReadJoint->name = str;
+	m_ReadJoint->position = t;
+	m_ReadJoint->scale = s;
+	m_ReadJoint->rotation = r;
 
 	while( checkSize(fp) ){
 		string t=readChunk(fp);
@@ -251,7 +252,7 @@ void MeshLoaderB3D::readNODE(FILE* fp)
 		exitChunk(fp);
 	}
 
-	//m_ReadJoint = m_ReadJoint->parent;
+	m_ReadJoint = m_ReadJoint->parent;
 }
 
 void MeshLoaderB3D::readBRUS(FILE* fp)
@@ -262,7 +263,7 @@ void MeshLoaderB3D::readBRUS(FILE* fp)
 	}
 	while( checkSize(fp) ){
 		string name=readString(fp);
-		printTree(name.c_str());
+		// printTree(name.c_str());
 		Vec3 color= readVec3(fp);
 		float alpha=readFloat(fp);
 		float shiny=readFloat(fp);
@@ -282,8 +283,8 @@ void MeshLoaderB3D::readBONE(FILE* fp)
 	while( checkSize(fp) ){
 		int vertex=readInt(fp);
 		float weight=readFloat(fp);
-	//	m_ReadJoint->vertexIndices.push_back(vertex);
-	//	m_ReadJoint->vertexWeights.push_back(weight);
+		m_ReadJoint->vertexIndices.push_back(vertex);
+		m_ReadJoint->vertexWeights.push_back(weight);
 #ifdef DEBUG_B3D
 		i++;
 #endif
@@ -295,7 +296,7 @@ void MeshLoaderB3D::readMesh(FILE* fp)
 {
 	/*int matid=*/readInt(fp);
 
-	printTree("mesh");
+	//printTree("mesh");
 	while( checkSize(fp) ){
 		string t=readChunk(fp);
 		if( t=="VRTS" ){
@@ -370,6 +371,7 @@ void MeshLoaderB3D::readANIM(FILE* fp){
 	/*int flags=*/readInt(fp);
 	int frames=readInt(fp);
 	float fps=readFloat(fp);
+	m_TotalFrame = frames;
 }
 
 void MeshLoaderB3D::readKEY(FILE* fp)
@@ -379,18 +381,18 @@ void MeshLoaderB3D::readKEY(FILE* fp)
 		int frame=readInt(fp);
 		if (flags & 1){
 			Vec3 v = readVec3(fp);
-		//	PositionKey k = { v, frame };
-		//	m_ReadJoint->positionKeys.push_back(k);
+			PositionKey k = { v, frame };
+			m_ReadJoint->positionKeys.push_back(k);
 		}
 		if( flags & 2 ){
 			Vec3 v = readVec3(fp);
-		//	ScaleKey k = { v, frame };
-		//	m_ReadJoint->scaleKeys.push_back(k);
+			ScaleKey k = { v, frame };
+			m_ReadJoint->scaleKeys.push_back(k);
 		}
 		if( flags & 4 ){
 			Quat r = readQuat(fp);
-		//	RotationKey k = { r, frame };
-		//	m_ReadJoint->rotationKeys.push_back(k);
+			RotationKey k = { r, frame };
+			m_ReadJoint->rotationKeys.push_back(k);
 		}
 	}
 }

@@ -1,10 +1,11 @@
 #include "Camera.h"
 #include "math/vec3.h"
-#include "base/GameObject.h"
 #include "math/quat.h"
+#include "math/mat4.h"
 #include <vector>
+#include "base/GameObject.h"
 #include "renderer/GLProgramCache.h"
-#include "gl/glew.h"
+#include "renderer/Renderer.h"
 using std::vector;
 
 Camera* Camera::main = nullptr;
@@ -24,8 +25,7 @@ void Camera::Start()
 	gameObject->getTransform()->setPosition(Vec3(0, 0, 0));
 	_LookAtMatrix.buildLookAt(Vec3(0, 0, 700), Vec3(0, 0, 0), Vec3(0, 1, 0));
 
-	_PerspectiveMatrix.buildPerspectiveProjection((float)QUAT_PI / 3, 800 / 600, 1, 1000);
-
+	_PerspectiveMatrix.buildPerspectiveProjection((float)QUAT_PI / 3, 800.0 / 600, 1, 1000);
 
 	traverse(gameObject->getTransform());
 
@@ -66,4 +66,6 @@ void Camera::OnGUI()
 			comp->OnGUI();
 		}
 	}
+
+	Renderer::getInstance()->render();
 }

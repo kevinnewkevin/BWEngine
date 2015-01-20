@@ -7,41 +7,46 @@
 #include "utils/FileUtils.h"
 #include "renderer/Mesh.h"
 #include "utils/MeshLoaderB3D.h"
+#include "renderer/SkinnedMesh.h"
+#include "renderer/Renderer.h"
 
 MeshRenderer::MeshRenderer(GameObject* _gameObject/* = nullptr*/)
 	: BaseComponent(_gameObject)
 	, _texture(nullptr)
 	, _mesh(nullptr)
+	, _skinnedMesh(nullptr)
 {
 }
 
 MeshRenderer::~MeshRenderer()
 {
+	SAFE_DELETE(_skinnedMesh);
 	SAFE_DELETE(_mesh);
 }
 
 void MeshRenderer::setFile(const char* file)
 {
 	_filePath = FileUtils::getInstance()->fullPathForFilename(file);
-}
-
-void MeshRenderer::Awake()
-{
 	MeshLoaderB3D loader;
 	if (loader.loadMesh(_filePath.c_str()))
 		LOG("load mesh %s success", _filePath.c_str());
 
 	_mesh = loader._meshVec[0];
+	getSkin()->init(_mesh, loader.m_RootJoint, loader.m_TotalFrame);
+}
+
+void MeshRenderer::Awake()
+{
 }
 
 void MeshRenderer::Start()
 {
-	_texture = ResourceManager::getInstance()->addTexture("nskinbl.jpg");
-
-	material = Material::create(GLProgramCache::getInstance()->getGLProgram(GLProgramCache::NAME::POSITION_TEXTURE));
-	material->setVertexAttribPointer(GLProgram::ATTRIBUTE::NAME_POSITION, 3, GL_FLOAT, GL_FALSE, 0, &_mesh->_positions[0]);
-	material->setVertexAttribPointer(GLProgram::ATTRIBUTE::NAME_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, &_mesh->_texCoords[0]);
-	material->setUniformTexture("Texture0", _texture);
+	_texture = ResourceManager::getInstance()->addTexture("nskinbl.tga");
+	material = MeshMaterial::create();
+	material->texture = _texture;
+	material->positions = &_mesh->_positions;
+	material->texCoords = &_mesh->_texCoords;
+	material->indices = &_mesh->_indices;
 }
 
 void MeshRenderer::OnEnable()
@@ -59,15 +64,23 @@ void MeshRenderer::OnDestroy()
 void MeshRenderer::Update(float dt)
 {
 	BaseComponent::Update(dt);
+	if (_skinnedMesh)
+	{
+		_skinnedMesh->update(dt);
+		material->positions = &_skinnedMesh->getSkinnedmeshPositions();
+	}
 }
 
 void MeshRenderer::OnGUI()
 {
 	if (_mesh->_positions.size() <= 0)
 		return;
+	_cmd.init(material, &gameObject->mvpMatrix);
+	Renderer::getInstance()->addCommand(&_cmd);
+}
 
-	material->apply(gameObject->mvpMatrix);
-	glDrawElements(GL_TRIANGLES, _mesh->_indices.size(), GL_UNSIGNED_SHORT, &_mesh->_indices[0]);
-	
-	CheckGLError();
+SkinnedMesh * MeshRenderer::getSkin()
+{
+	if (_skinnedMesh == nullptr) _skinnedMesh = new SkinnedMesh();
+	return _skinnedMesh;
 }

@@ -317,3 +317,67 @@ bool loadImageJPG(const char *file, Image& i)
 	return true;
 }
 
+
+// TGA
+#include "extern/libtga/TGAlib.h"
+bool loadImageTGA(const char *file, Image& i)
+{
+	bool ret = false;
+	auto info = tgaLoad(file);
+	if (info != nullptr && info->status == TGA_OK)
+	{
+		do
+		{
+			BREAK_IF(info == nullptr);
+			// tgaLoadBuffer only support type 2, 3, 10
+			if (2 == info->type || 10 == info->type)
+			{
+				// true color
+				// unsupport RGB555
+				if (info->pixelDepth == 16)
+				{
+					i._internalFormat = GL_RGB5_A1;
+					i._format = GL_RGB5_A1;
+					ret = true;
+				}
+				else if (info->pixelDepth == 24)
+				{
+					i._internalFormat = GL_RGB;
+					i._format = GL_RGB;
+					ret = true;
+				}
+				else if (info->pixelDepth == 32)
+				{
+					i._internalFormat = GL_RGBA;
+					i._format = GL_RGBA;
+					ret = true;
+				}
+				else
+				{
+					LOG("Image WARNING: unsupport true color tga data pixel format. FILE: %s", file);
+					break;
+				}
+			}
+
+		} while (false);
+
+		if (ret)
+		{
+			i._width = info->width;
+			i._height = info->height;
+			i._data.push_back(info->imageData);
+			i._levelCount = 1;
+			i._faces = 0;
+			i._depth = info->pixelDepth;
+		}
+		else
+		{
+			if (info && info->imageData != nullptr)
+			{
+				free(info->imageData);
+			}
+		}
+	}
+	SAFE_FREE(info);
+	return ret;
+}

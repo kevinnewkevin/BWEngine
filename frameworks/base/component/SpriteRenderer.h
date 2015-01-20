@@ -1,6 +1,8 @@
 #pragma once
 #include "base/component/BaseComponent.h"
-#include "renderer/Material.h"
+#include "renderer/material/MeshMaterial.h"
+#include "renderer/command/MeshCommand.h"
+#include "renderer/Mesh.h"
 
 class GameObject;
 class Texture;
@@ -21,16 +23,16 @@ public:
 	virtual void OnGUI();
 
 	void updateTexture();
+	void setTextureRect(Rect& rect);
 
 public:
-	Material* material = nullptr;
+	MeshMaterial* material = nullptr;
 	Texture* texture = nullptr;
 
 protected:
-	std::vector<Vec3> vertices;
-	std::vector<Vec2> texCoords;
-	std::vector<unsigned short> indices;
-
+	Mesh _mesh;
 	bool _isDirty = false;
+	Rect _textureRect;
+	MeshCommand _cmd;
 };
 

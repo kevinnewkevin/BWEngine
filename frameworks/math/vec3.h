@@ -7,13 +7,20 @@
 class Vec3  
 {
 public:
+	// member variables
+
+	float x, y, z;
+
+public:
 
 	Vec3(): x(0), y(0), z(0) {};
 	Vec3(float nx, float ny, float nz) : x(nx), y(ny), z(nz) {};
 	Vec3(const Vec3& other)	:x(other.x), y(other.y), z(other.z) {};
+	Vec3(Vec3&& other) :x(other.x), y(other.y), z(other.z) {};
 
 	// operators
 
+	Vec3& operator=(Vec3&& other) { x = other.x; y = other.y; z = other.z; return *this; }
 	Vec3& operator=(const Vec3& other)	{ x = other.x; y = other.y; z = other.z; return *this; }
 
 	Vec3 operator+(const Vec3& other) const { return Vec3(x + other.x, y + other.y, z + other.z);	}
@@ -132,9 +139,6 @@ public:
 		y += center.y;
 	}
 
-	// member variables
-
-	float x, y, z;
 };
 
 

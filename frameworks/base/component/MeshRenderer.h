@@ -1,6 +1,7 @@
 #pragma once
 #include "base/component/BaseComponent.h"
-#include "renderer/Material.h"
+#include "renderer/material/MeshMaterial.h"
+#include "renderer/command/MeshCommand.h"
 #include <string>
 
 using std::string;
@@ -8,6 +9,7 @@ using std::string;
 class GameObject;
 class Texture;
 class Mesh;
+class SkinnedMesh;
 
 class MeshRenderer : public BaseComponent
 {
@@ -24,12 +26,17 @@ public:
 	virtual void Update(float dt);
 
 	virtual void OnGUI();
+
+	SkinnedMesh* getSkin();
+
 public:
 
-	Material* material = nullptr;
+	MeshMaterial* material = nullptr;
 	string _filePath;
 	Mesh*  _mesh;
+	SkinnedMesh* _skinnedMesh;
 	Texture* _texture;
 protected:
+	MeshCommand _cmd;
 };
 

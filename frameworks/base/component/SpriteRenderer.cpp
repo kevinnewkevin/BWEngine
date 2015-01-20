@@ -2,6 +2,7 @@
 #include "base/GameObject.h"
 #include "renderer/GLProgramCache.h"
 #include "renderer/Texture.h"
+#include "renderer/Renderer.h"
 #include "base/ResourceManager.h"
 #include "utils/FileUtils.h"
 
@@ -17,27 +18,31 @@ SpriteRenderer::~SpriteRenderer()
 
 void SpriteRenderer::Awake()
 {
-	vertices.assign({
+	_mesh._positions.assign({
 		Vec3(), Vec3(),
 		Vec3(), Vec3(),
 	});
-	texCoords.assign({
+	_mesh._texCoords.assign({
 		Vec2(0, 0), Vec2(1, 0),
 		Vec2(1, 1), Vec2(0, 1),
 	});
-	indices.assign({ 0, 1, 2, 0, 2, 3 });
+	_mesh._indices.assign({ 0, 1, 2, 0, 2, 3 });
 }
 
 void SpriteRenderer::Start()
 {
 	texture = ResourceManager::getInstance()->addTexture("img2_2.png");
 
-	material = Material::create(GLProgramCache::getInstance()->getGLProgram(GLProgramCache::NAME::POSITION_TEXTURE));
-	material->setVertexAttribPointer(GLProgram::ATTRIBUTE::NAME_POSITION, 3, GL_FLOAT, GL_FALSE, 0, &vertices[0]);
-	material->setVertexAttribPointer(GLProgram::ATTRIBUTE::NAME_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, &texCoords[0]);
-	material->setUniformTexture("Texture0", texture);
+	material = MeshMaterial::create();
+	material->texture = texture;
+	material->positions = &_mesh._positions;
+	material->texCoords = &_mesh._texCoords;
+	material->indices = &_mesh._indices;
 
+	_textureRect = Rect(Vec2(0, 0), texture->getSize());
 	_isDirty = true;
+
+	_textureRect = Rect(Vec2(30, 30), Size(50, 50));
 }
 
 void SpriteRenderer::OnEnable()
@@ -60,8 +65,8 @@ void SpriteRenderer::Update(float dt)
 
 void SpriteRenderer::OnGUI()
 {
-	material->apply(gameObject->mvpMatrix);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, &indices[0]);	
+	_cmd.init(material, &gameObject->mvpMatrix);
+	Renderer::getInstance()->addCommand(&_cmd);	
 }
 
 void SpriteRenderer::updateTexture()
@@ -69,8 +74,23 @@ void SpriteRenderer::updateTexture()
 	if (!_isDirty) return;
 	_isDirty = false;
 
-	float width = texture->getSize().width, height = texture->getSize().height;
-	vertices[1].x = width;
-	vertices[2].x = width, vertices[2].y = height;
-	vertices[3].y = height;
+	float origionWidth = texture->getSize().width;
+	float origionHeight = texture->getSize().height;
+
+	float x = _textureRect.x, y = _textureRect.y;
+	float width = _textureRect.width, height = _textureRect.height;
+	_mesh._positions[0].x = x,			_mesh._positions[0].y = y;
+	_mesh._positions[1].x = x + width,	_mesh._positions[1].y = y;
+	_mesh._positions[2].x = x + width,	_mesh._positions[2].y = y + height;
+	_mesh._positions[3].x = 0,			_mesh._positions[3].y = y + height;
+
+	_mesh._texCoords[0].x = _mesh._positions[0].x / origionWidth, _mesh._texCoords[0].y = _mesh._positions[0].y / origionHeight;
+	_mesh._texCoords[1].x = _mesh._positions[1].x / origionWidth, _mesh._texCoords[1].y = _mesh._positions[1].y / origionHeight;
+	_mesh._texCoords[2].x = _mesh._positions[2].x / origionWidth, _mesh._texCoords[2].y = _mesh._positions[2].y / origionHeight;
+	_mesh._texCoords[3].x = _mesh._positions[3].x / origionWidth, _mesh._texCoords[3].y = _mesh._positions[3].y / origionHeight;
+}
+
+void SpriteRenderer::setTextureRect(Rect & rect)
+{
+	_textureRect = rect;
 }

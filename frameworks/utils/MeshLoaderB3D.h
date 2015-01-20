@@ -12,6 +12,7 @@ using std::vector;
 using std::string;
 
 class Mesh;
+class Joint;
 
 class MeshLoaderB3D
 {
@@ -84,12 +85,14 @@ public:
 	vector<unsigned int> m_Stack;
 
 	vector<Mesh*> _meshVec;
+
 	int           _meshCount;
 //	unsigned int*	m_Indice;
 //	vec2*			m_TexCoord;
 //	vec3*			m_Position;
-//	Joint*			m_RootJoint;
-//	Joint*			m_ReadJoint;
+	Joint*			m_RootJoint;
+	Joint*			m_ReadJoint;
+	float			m_TotalFrame;
 //	unsigned int    m_NumOfVertex;
 
 };

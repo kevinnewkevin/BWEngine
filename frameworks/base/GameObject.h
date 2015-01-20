@@ -16,7 +16,6 @@ public:
 public:
 	void Update(float dt);
 
-
 	// component
 public:
 	Transform* getTransform();
