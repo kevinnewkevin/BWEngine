@@ -41,7 +41,7 @@ void MeshRenderer::Awake()
 
 void MeshRenderer::Start()
 {
-	_texture = ResourceManager::getInstance()->addTexture("nskinbl.tga");
+	_texture = ResourceManager::getInstance()->addTexture("nskinbl.jpg");
 	material = MeshMaterial::create();
 	material->texture = _texture;
 	material->positions = &_mesh->_positions;

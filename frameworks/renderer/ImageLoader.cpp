@@ -1,6 +1,7 @@
 #include "png.h"
 #include "Image.h"
 #include <stdio.h>
+#include "ImageLoader.h"
 #include "utils/FileUtils.h"
 
 static void pngReadFn( png_structp png_ptr, png_bytep data, png_size_t length) {
@@ -250,6 +251,7 @@ bool loadImageJPG(const char *file, Image& i)
 		cinfo.out_color_space=JCS_RGB;
 		cinfo.out_color_components=3;
 		i._internalFormat = GL_RGB;
+		i._elementSize = 3;
 		i._format = GL_RGB;
 	}
 	cinfo.output_gamma=2.2;
@@ -268,8 +270,8 @@ bool loadImageJPG(const char *file, Image& i)
 	// Create array of row pointers for lib
 	rowPtr = new unsigned char* [height];
 
-	for( unsigned int i = 0; i < height; i++ )
-		rowPtr[i] = &output[ i * rowspan ];
+	for( unsigned int ii = 0; ii < height; ii++ )
+		rowPtr[ii] = &output[ ii * rowspan ];
 
 	unsigned int rowsRead = 0;
 
@@ -294,15 +296,15 @@ bool loadImageJPG(const char *file, Image& i)
 		imageData = new unsigned char[3 * width*height];
 		if (imageData)
 		{
-			for (unsigned int i = 0, j = 0; i < size; i += 3, j += 4)
+			for (int ii = 0, j = 0; ii < size; ii += 3, j += 4)
 			{
 				// Also works without K, but has more contrast with K multiplied in
 				//				data[i+0] = output[j+2];
 				//				data[i+1] = output[j+1];
 				//				data[i+2] = output[j+0];
-				imageData[i + 0] = (char)(output[j + 2] * (output[j + 3] / 255.f));
-				imageData[i + 1] = (char)(output[j + 1] * (output[j + 3] / 255.f));
-				imageData[i + 2] = (char)(output[j + 0] * (output[j + 3] / 255.f));
+				imageData[ii + 0] = (char)(output[j + 2] * (output[j + 3] / 255.f));
+				imageData[ii + 1] = (char)(output[j + 1] * (output[j + 3] / 255.f));
+				imageData[ii + 2] = (char)(output[j + 0] * (output[j + 3] / 255.f));
 			}
 		}
 		delete[] output;
@@ -314,6 +316,7 @@ bool loadImageJPG(const char *file, Image& i)
     i._levelCount = 1;
     i._faces = 0;
     i._depth = 0;
+	i.flipSurface();
 	return true;
 }
 

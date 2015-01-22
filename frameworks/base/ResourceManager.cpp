@@ -4,6 +4,20 @@
 #include "renderer/ImageLoader.h"
 #include "utils/FileUtils.h"
 
+typedef bool(*loadImageFunc)(const char*, Image&);
+struct LoaderPlugin{
+	const char* name;
+	loadImageFunc pFunc;
+};
+
+static LoaderPlugin loaderPlugin[] = {
+    { "jpg", loadImageJPG},
+    { "png", loadImagePNG},
+    { "tga", loadImageTGA},
+	{ "bmp", loadImageBMP}
+};
+static int PluginCount = sizeof(loaderPlugin) / sizeof(LoaderPlugin);
+
 ResourceManager* ResourceManager::sm_pSharedInstance = nullptr;
 ResourceManager::ResourceManager()
 {
@@ -39,12 +53,14 @@ Texture* ResourceManager::addTexture(const char* file)
 	std::string basename(file);
     std::transform(basename.begin(), basename.end(), basename.begin(), ::tolower);
     
-	if (basename.find(".png") != std::string::npos)
-		loadImagePNG(fullPath.c_str(), image);
-	else if (basename.find(".jpg") != std::string::npos)
-		loadImageJPG(fullPath.c_str(), image);
-	else if (basename.find(".tga") != std::string::npos)
-		loadImageTGA(fullPath.c_str(), image);
+	for (int i = 0; i < PluginCount; ++i)
+	{
+		if (basename.find(loaderPlugin[i].name) != std::string::npos)
+		{
+			loaderPlugin[i].pFunc(fullPath.c_str(), image);
+			break;
+		}
+	}
 
 	texture = new Texture();
 	texture->initWithImage(&image);

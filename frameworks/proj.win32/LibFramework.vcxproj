@@ -106,6 +106,7 @@
     <ClCompile Include="..\renderer\GLProgramCache.cpp" />
     <ClCompile Include="..\renderer\Image.cpp" />
     <ClCompile Include="..\renderer\ImageLoader.cpp" />
+    <ClCompile Include="..\renderer\ImageLoaderBMP.cpp" />
     <ClCompile Include="..\renderer\Joint.cpp" />
     <ClCompile Include="..\renderer\material\Material.cpp" />
     <ClCompile Include="..\renderer\material\MeshMaterial.cpp" />

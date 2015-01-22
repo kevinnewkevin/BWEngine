@@ -23,6 +23,7 @@ public:
 		float m31, float m32, float m33, float m34, float m41, float m42, float m43, float m44);
 	~Mat4() {}
 
+	Mat4(const Mat4& mat) { this->set(mat); }
 	Mat4(Mat4&& mat) { *this = std::move(mat); }
 	Mat4& operator = (Mat4&& mat) { this->set(mat); return *this; }
 	Mat4& operator = (const Mat4& mat) { this->set(mat); return *this; }

@@ -31,7 +31,8 @@ void SpriteRenderer::Awake()
 
 void SpriteRenderer::Start()
 {
-	texture = ResourceManager::getInstance()->addTexture("img2_2.png");
+	//texture = ResourceManager::getInstance()->addTexture("img2_2.png");
+	texture = ResourceManager::getInstance()->addTexture("BigGlow3.bmp");
 
 	material = MeshMaterial::create();
 	material->texture = texture;

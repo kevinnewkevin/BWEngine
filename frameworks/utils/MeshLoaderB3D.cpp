@@ -144,7 +144,7 @@ bool MeshLoaderB3D::readVRTS(FILE* fp)
 			//for (int j = 0; j < tex_coord_set_size; ++j)
 			{
 				u = readFloat(fp);
-				v = readFloat(fp);
+				v = 1.0f - readFloat(fp);
 			}
 		}
 	

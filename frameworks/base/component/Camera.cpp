@@ -25,7 +25,7 @@ void Camera::Start()
 	gameObject->getTransform()->setPosition(Vec3(0, 0, 0));
 	_LookAtMatrix.buildLookAt(Vec3(0, 0, 700), Vec3(0, 0, 0), Vec3(0, 1, 0));
 
-	_PerspectiveMatrix.buildPerspectiveProjection((float)QUAT_PI / 3, 800.0 / 600, 1, 1000);
+	_PerspectiveMatrix.buildPerspectiveProjection((float)QUAT_PI / 3, 800.0f / 600, 1, 1000);
 
 	traverse(gameObject->getTransform());
 
